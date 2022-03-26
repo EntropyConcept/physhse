@@ -3,6 +3,9 @@
 .main,
 .main.blue {
     @include appearance(none);
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
     transition: 0.2s;
     outline: none;
     border: none;

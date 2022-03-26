@@ -1,4 +1,3 @@
-import React from 'react'
 import style from "./style.module.scss";
 import classNames from 'classnames';
 import {FunctionComponent} from "react"
@@ -11,7 +10,7 @@ type Props = {
 
 const Header : FunctionComponent<Props> = (props:Props) => {
     const router = useRouter();
-    let dir = router.pathname.split("/")
+    let dir = router.pathname.split("/");
     return (
       <div className={style.main}>
           <div className={style.container}>
@@ -28,7 +27,8 @@ const Header : FunctionComponent<Props> = (props:Props) => {
                     <Link passHref href="/other"><button className={classNames({[style.selected]:props.tab == 5 || dir[1] == "other"})}>Другое</button></Link>
                   </div>
               </div>
-              <div className={style.right}></div>
+              <div className={style.right}>
+              </div>
           </div>
       </div>
     )

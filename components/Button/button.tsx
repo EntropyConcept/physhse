@@ -4,26 +4,26 @@ import classNames from 'classnames'
 import { FunctionComponent } from 'react'
 
 type Props = {
-  black?: boolean,
-  blue?: boolean,
-  white?: boolean,
-  small?: boolean,
-  width?: string | number,
-  className?: string,
-  children?: any
+  black ?: boolean,
+  blue ?: boolean,
+  white ?: boolean,
+  small ?: boolean,
+  width ?: string | number,
+  className ?: string,
+  children ?: any,
+  onClick ?: (...args : any[]) => any,
+  style ?: any
 }
 
 const Button:FunctionComponent<Props> = (props:Props) => {
   return (
-    <div className={
+    <div onClick={props.onClick} className={
         classNames(style.main, props.className, {
           [style.black]: props.black, 
           [style.white]: props.white, 
           [style.blue]: props.blue, 
           [style.small]: props.small})
-      } style={{
-        width: props.width,
-      }}>
+      } style={props.style}>
       {props.children}
     </div>
   )
