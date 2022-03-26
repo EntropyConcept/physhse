@@ -3,7 +3,17 @@ import style from "./style.module.scss"
 import classNames from 'classnames'
 import { FunctionComponent } from 'react'
 
-const Button:FunctionComponent = (props:any, black = false, white = false, blue = true, small = false) => {
+type Props = {
+  black: boolean,
+  blue: boolean,
+  white: boolean,
+  small: boolean,
+  width: string | number,
+  className: string,
+  children: any
+}
+
+const Button:FunctionComponent<Props> = (props:Props) => {
   return (
     <div className={
         classNames(style.main, props.className, {

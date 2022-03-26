@@ -5,7 +5,11 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import {FunctionComponent} from "react"
 
-const Header : FunctionComponent = (props:any) => {
+type Props = {
+    tab: number | undefined | boolean
+}
+
+const Header : FunctionComponent<Props> = (props:Props) => {
     return (
       <div className={style.main}>
           <div className={style.container}>
