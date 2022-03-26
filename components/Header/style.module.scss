@@ -23,6 +23,7 @@
         .right {
             height: 7rem;
             button {
+                cursor: pointer;
                 transition: 0.3s;
                 @include appearance(none);
                 border: none;
@@ -58,6 +59,7 @@
                     }
                 }
                 &::before {
+                    pointer-events: none;
                     position: absolute;
                     transition: 0.3s;
                     background: gray(9, 0.1);
@@ -88,6 +90,7 @@
                     height: 3rem;
                     margin: 0 0.5rem;
                     margin-top: 1rem;
+                    cursor: pointer;
                 }
             }
             .buttons {

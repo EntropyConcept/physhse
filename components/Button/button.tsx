@@ -4,13 +4,13 @@ import classNames from 'classnames'
 import { FunctionComponent } from 'react'
 
 type Props = {
-  black: boolean,
-  blue: boolean,
-  white: boolean,
-  small: boolean,
-  width: string | number,
-  className: string,
-  children: any
+  black?: boolean,
+  blue?: boolean,
+  white?: boolean,
+  small?: boolean,
+  width?: string | number,
+  className?: string,
+  children?: any
 }
 
 const Button:FunctionComponent<Props> = (props:Props) => {
