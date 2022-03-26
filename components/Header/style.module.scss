@@ -1,0 +1,124 @@
+@import "../../styles/vars.scss";
+
+.main {
+    @include container-full;
+    min-height: 7rem;
+    background: gray(1);
+    box-shadow: $shadow;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    body[dark] & {
+        background: gray(8);
+    }
+    .container {
+        min-height: 7rem;
+        @include container-large($max: $screen-large);
+        @media screen and (max-width: $screen-large) {
+            @include container-huge;
+        }
+        @include content-center;
+        justify-content: space-between;
+        .left,
+        .right {
+            height: 7rem;
+            button {
+                transition: 0.3s;
+                @include appearance(none);
+                border: none;
+                border-bottom: 2px solid gray(3);
+                outline: none;
+                font-size: 1rem;
+                background: none;
+                color: gray(5);
+                padding: 0.6rem 0.6rem;
+                padding-top: 0;
+                margin: 0;
+                white-space: nowrap;
+                @include content-center;
+
+                position: relative;
+                body[dark] & {
+                    border-color: gray(7);
+                }
+                &:hover {
+                    color: gray(6);
+                    border-color: gray(4);
+                    body[dark] & {
+                        color: gray(4);
+                        border-color: gray(5);
+                    }
+                }
+                &.selected {
+                    border-color: gray(9);
+                    color: gray(7);
+                    body[dark] & {
+                        border-color: gray(6);
+                        color: gray(3);
+                    }
+                }
+                &::before {
+                    position: absolute;
+                    transition: 0.3s;
+                    background: gray(9, 0.1);
+                    border-radius: 0.25rem;
+                    top: -0.25rem;
+                    bottom: 0.45rem;
+                    left: 0;
+                    right: 0;
+                    content: " ";
+                    opacity: 0;
+                    body[dark] & {
+                        background: gray(1, 0.05);
+                    }
+                }
+                &:hover {
+                    &::before {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        .left {
+            display: flex;
+            flex-direction: column;
+            .label {
+                min-height: 4rem;
+                .logo {
+                    height: 3rem;
+                    margin: 0 0.5rem;
+                    margin-top: 1rem;
+                }
+            }
+            .buttons {
+                @include full-flex;
+                display: flex;
+                align-items: flex-end;
+            }
+            @media screen and (max-width: 420px) {
+                overflow-x: scroll;
+                overflow-y: hidden;
+                .buttons {
+                    transform: translateY(0.4rem);
+                }
+            }
+            &::-webkit-scrollbar {
+                height: 0.4rem;
+                position: absolute;
+                background: none;
+            }
+            &::-webkit-scrollbar-track {
+                background: none;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 1rem;
+                background: gray(9, 0.1);
+                body[dark] & {
+                    background: gray(1, 0.1);
+                }
+            }
+        }
+        .right {
+        }
+    }
+}

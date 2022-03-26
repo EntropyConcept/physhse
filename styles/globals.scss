@@ -1,0 +1,159 @@
+@import "vars";
+body,
+html {
+    transition: 0.3s;
+    background: gray(2);
+    $col: #ff0;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    // display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    width: 100%;
+}
+body.dark,
+body[dark] {
+    background: mix(gray(8), gray(9));
+    color: gray(2);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: $screen-large) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: $screen-medium) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: $screen-small) {
+    html {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: $screen-tiny) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: $screen-phone) {
+    html {
+        font-size: 11px;
+    }
+}
+
+p {
+    color: gray(6);
+    font-size: 1.2rem;
+}
+body.dark,
+body[dark] {
+    p {
+        color: gray(4);
+    }
+}
+
+@for $i from 1 to 7 {
+    h#{$i} {
+        transition: 0.3s;
+        margin: (7-$i) * 0.3rem;
+        font-size: (7-$i) * 0.7rem;
+        color: mix(gray(8), gray(7));
+    }
+}
+
+h3 {
+    font-weight: 500;
+}
+
+h4,
+h5,
+h6 {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+@media screen and (max-width: $screen-large) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: $screen-medium) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@for $i from 1 to 7 {
+    h#{$i} {
+        margin: (7-$i) * 0.3rem;
+        font-size: (7-$i) * 0.7rem;
+    }
+}
+
+h3 {
+    font-weight: 500;
+}
+
+h4,
+h5,
+h6 {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body.dark {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: mix(gray(2), gray(3));
+    }
+}
+
+a.styled {
+    transition: 0.2s;
+    color: sky();
+    &:hover {
+        color: sky(6);
+        border-radius: 0.2rem;
+        box-shadow: 0 0.1rem 0 0.2rem blue(5, 0.2);
+        background: blue(5, 0.2);
+        body[dark] & {
+            color: sky(3);
+        }
+    }
+}
+
+::selection {
+    color: blue(4);
+    background: blue(5, 0.2);
+}

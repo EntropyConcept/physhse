@@ -1,0 +1,836 @@
+@import url("https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap");
+$font-strict: "Tenor Sans", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+$font-playful: "Poppins", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+$font: "Inter", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,500;0,700;0,800;0,900;1,100;1,400&display=swap");
+$font-raleway: "Raleway", sans-serif;
+$font-code: Consolas, monaco, monospace;
+$transition: cubic-bezier(0.8, -0.27, 0.2, 1.27);
+$shadow: 0 4px 20px #0001;
+$screen-huge: 1440px;
+$screen-large: 1280px;
+$screen-medium: 1024px;
+$screen-small: 768px;
+$screen-tiny: 600px;
+$screen-phone: 400px;
+
+@mixin text-gradient($gradient) {
+    background: $gradient;
+    -moz-background-clip: text;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: #0000;
+}
+
+@function cold-gray($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#f8fafc, $alpha);
+    } @else if $var==1 {
+        @return rgba(#f1f5f9, $alpha);
+    } @else if $var==2 {
+        @return rgba(#e2e8f0, $alpha);
+    } @else if $var==3 {
+        @return rgba(#cbd5e1, $alpha);
+    } @else if $var==4 {
+        @return rgba(#94a3b8, $alpha);
+    } @else if $var==5 {
+        @return rgba(#64748b, $alpha);
+    } @else if $var==6 {
+        @return rgba(#475569, $alpha);
+    } @else if $var==7 {
+        @return rgba(#334155, $alpha);
+    } @else if $var==8 {
+        @return rgba(#1e293b, $alpha);
+    } @else if $var==9 {
+        @return rgba(#0f172a, $alpha);
+    }
+}
+
+@function cool-gray($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#f9fafb, $alpha);
+    } @else if $var==1 {
+        @return rgba(#f3f4f6, $alpha);
+    } @else if $var==2 {
+        @return rgba(#e5e7eb, $alpha);
+    } @else if $var==3 {
+        @return rgba(#d1d5db, $alpha);
+    } @else if $var==4 {
+        @return rgba(#9ca3af, $alpha);
+    } @else if $var==5 {
+        @return rgba(#6b7280, $alpha);
+    } @else if $var==6 {
+        @return rgba(#4b5563, $alpha);
+    } @else if $var==7 {
+        @return rgba(#374151, $alpha);
+    } @else if $var==8 {
+        @return rgba(#1f2937, $alpha);
+    } @else if $var==9 {
+        @return rgba(#111827, $alpha);
+    }
+}
+
+@function gray($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#fafafa, $alpha);
+    } @else if $var==1 {
+        @return rgba(#f4f4f5, $alpha);
+    } @else if $var==2 {
+        @return rgba(#e4e4e7, $alpha);
+    } @else if $var==3 {
+        @return rgba(#d4d4d8, $alpha);
+    } @else if $var==4 {
+        @return rgba(#a1a1aa, $alpha);
+    } @else if $var==5 {
+        @return rgba(#71717a, $alpha);
+    } @else if $var==6 {
+        @return rgba(#52525b, $alpha);
+    } @else if $var==7 {
+        @return rgba(#3f3f46, $alpha);
+    } @else if $var==8 {
+        @return rgba(#27272a, $alpha);
+    } @else if $var==9 {
+        @return rgba(#18181b, $alpha);
+    }
+}
+
+@function true-gray($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#fafafa, $alpha);
+    } @else if $var==1 {
+        @return rgba(#f5f5f5, $alpha);
+    } @else if $var==2 {
+        @return rgba(#e5e5e5, $alpha);
+    } @else if $var==3 {
+        @return rgba(#d4d4d4, $alpha);
+    } @else if $var==4 {
+        @return rgba(#a3a3a3, $alpha);
+    } @else if $var==5 {
+        @return rgba(#737373, $alpha);
+    } @else if $var==6 {
+        @return rgba(#525252, $alpha);
+    } @else if $var==7 {
+        @return rgba(#404040, $alpha);
+    } @else if $var==8 {
+        @return rgba(#262626, $alpha);
+    } @else if $var==9 {
+        @return rgba(#171717, $alpha);
+    }
+}
+
+@function warm-gray($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#fafaf9, $alpha);
+    } @else if $var==1 {
+        @return rgba(#f5f5f4, $alpha);
+    } @else if $var==2 {
+        @return rgba(#e7e5e4, $alpha);
+    } @else if $var==3 {
+        @return rgba(#d6d3d1, $alpha);
+    } @else if $var==4 {
+        @return rgba(#a8a29e, $alpha);
+    } @else if $var==5 {
+        @return rgba(#78716c, $alpha);
+    } @else if $var==6 {
+        @return rgba(#57534e, $alpha);
+    } @else if $var==7 {
+        @return rgba(#44403c, $alpha);
+    } @else if $var==8 {
+        @return rgba(#292524, $alpha);
+    } @else if $var==9 {
+        @return rgba(#1c1917, $alpha);
+    }
+}
+
+@function red($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#fef2f2, $alpha);
+    } @else if $var==1 {
+        @return rgba(#fee2e2, $alpha);
+    } @else if $var==2 {
+        @return rgba(#fecaca, $alpha);
+    } @else if $var==3 {
+        @return rgba(#fca5a5, $alpha);
+    } @else if $var==4 {
+        @return rgba(#f87171, $alpha);
+    } @else if $var==5 {
+        @return rgba(#ef4444, $alpha);
+    } @else if $var==6 {
+        @return rgba(#dc2626, $alpha);
+    } @else if $var==7 {
+        @return rgba(#b91c1c, $alpha);
+    } @else if $var==8 {
+        @return rgba(#991b1b, $alpha);
+    } @else if $var==9 {
+        @return rgba(#7f1d1d, $alpha);
+    }
+}
+
+@function orange($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#fff7ed, $alpha);
+    } @else if $var==1 {
+        @return rgba(#ffedd5, $alpha);
+    } @else if $var==2 {
+        @return rgba(#fed7aa, $alpha);
+    } @else if $var==3 {
+        @return rgba(#fdba74, $alpha);
+    } @else if $var==4 {
+        @return rgba(#fb923c, $alpha);
+    } @else if $var==5 {
+        @return rgba(#f97316, $alpha);
+    } @else if $var==6 {
+        @return rgba(#d97706, $alpha);
+    } @else if $var==7 {
+        @return rgba(#b45309, $alpha);
+    } @else if $var==8 {
+        @return rgba(#92400e, $alpha);
+    } @else if $var==9 {
+        @return rgba(#78350f, $alpha);
+    }
+}
+
+@function amber($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#fffbeb, $alpha);
+    } @else if $var==1 {
+        @return rgba(#fef3c7, $alpha);
+    } @else if $var==2 {
+        @return rgba(#fde68a, $alpha);
+    } @else if $var==3 {
+        @return rgba(#fcd34d, $alpha);
+    } @else if $var==4 {
+        @return rgba(#fbbf24, $alpha);
+    } @else if $var==5 {
+        @return rgba(#f59e0b, $alpha);
+    } @else if $var==6 {
+        @return rgba(#d97706, $alpha);
+    } @else if $var==7 {
+        @return rgba(#b45309, $alpha);
+    } @else if $var==8 {
+        @return rgba(#92400e, $alpha);
+    } @else if $var==9 {
+        @return rgba(#78350f, $alpha);
+    }
+}
+
+@function yellow($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#fefce8, $alpha);
+    } @else if $var==1 {
+        @return rgba(#fef9c3, $alpha);
+    } @else if $var==2 {
+        @return rgba(#fef08a, $alpha);
+    } @else if $var==3 {
+        @return rgba(#fde047, $alpha);
+    } @else if $var==4 {
+        @return rgba(#facc15, $alpha);
+    } @else if $var==5 {
+        @return rgba(#eab308, $alpha);
+    } @else if $var==6 {
+        @return rgba(#ca8a04, $alpha);
+    } @else if $var==7 {
+        @return rgba(#a16207, $alpha);
+    } @else if $var==8 {
+        @return rgba(#854d0e, $alpha);
+    } @else if $var==9 {
+        @return rgba(#713f12, $alpha);
+    }
+}
+
+@function lime($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#f7fee7, $alpha);
+    } @else if $var==1 {
+        @return rgba(#ecfccb, $alpha);
+    } @else if $var==2 {
+        @return rgba(#d9f99d, $alpha);
+    } @else if $var==3 {
+        @return rgba(#bef264, $alpha);
+    } @else if $var==4 {
+        @return rgba(#a3e635, $alpha);
+    } @else if $var==5 {
+        @return rgba(#84cc16, $alpha);
+    } @else if $var==6 {
+        @return rgba(#65a30d, $alpha);
+    } @else if $var==7 {
+        @return rgba(#4d7c0f, $alpha);
+    } @else if $var==8 {
+        @return rgba(#3f6212, $alpha);
+    } @else if $var==9 {
+        @return rgba(#365314, $alpha);
+    }
+}
+
+@function green($var: 5, $alpha: 15) {
+    @if $var==0 {
+        @return rgba(#f0fdf4, $alpha);
+    } @else if $var==1 {
+        @return rgba(#dcfce7, $alpha);
+    } @else if $var==2 {
+        @return rgba(#bbf7d0, $alpha);
+    } @else if $var==3 {
+        @return rgba(#86efac, $alpha);
+    } @else if $var==4 {
+        @return rgba(#4ade80, $alpha);
+    } @else if $var==5 {
+        @return rgba(#22c55e, $alpha);
+    } @else if $var==6 {
+        @return rgba(#16a34a, $alpha);
+    } @else if $var==7 {
+        @return rgba(#15803d, $alpha);
+    } @else if $var==8 {
+        @return rgba(#166534, $alpha);
+    } @else if $var==9 {
+        @return rgba(#14532d, $alpha);
+    }
+}
+
+@function emerald($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#ecfdf5, $alpha);
+    } @else if $var==1 {
+        @return rgba(#d1fae5, $alpha);
+    } @else if $var==2 {
+        @return rgba(#a7f3d0, $alpha);
+    } @else if $var==3 {
+        @return rgba(#6ee7b7, $alpha);
+    } @else if $var==4 {
+        @return rgba(#34d399, $alpha);
+    } @else if $var==5 {
+        @return rgba(#10b981, $alpha);
+    } @else if $var==6 {
+        @return rgba(#059669, $alpha);
+    } @else if $var==7 {
+        @return rgba(#047857, $alpha);
+    } @else if $var==8 {
+        @return rgba(#065f46, $alpha);
+    } @else if $var==9 {
+        @return rgba(#064e3b, $alpha);
+    }
+}
+
+@function teal($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#f0fdfa, $alpha);
+    } @else if $var==1 {
+        @return rgba(#ccfbf1, $alpha);
+    } @else if $var==2 {
+        @return rgba(#99f6e4, $alpha);
+    } @else if $var==3 {
+        @return rgba(#5eead4, $alpha);
+    } @else if $var==4 {
+        @return rgba(#2dd4bf, $alpha);
+    } @else if $var==5 {
+        @return rgba(#14b8a6, $alpha);
+    } @else if $var==6 {
+        @return rgba(#0d9488, $alpha);
+    } @else if $var==7 {
+        @return rgba(#0f766e, $alpha);
+    } @else if $var==8 {
+        @return rgba(#115e59, $alpha);
+    } @else if $var==9 {
+        @return rgba(#134e4a, $alpha);
+    }
+}
+
+@function cyan($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#ecfeff, $alpha);
+    } @else if $var==1 {
+        @return rgba(#cffafe, $alpha);
+    } @else if $var==2 {
+        @return rgba(#a5f3fc, $alpha);
+    } @else if $var==3 {
+        @return rgba(#67e8f9, $alpha);
+    } @else if $var==4 {
+        @return rgba(#22d3ee, $alpha);
+    } @else if $var==5 {
+        @return rgba(#06b6d4, $alpha);
+    } @else if $var==6 {
+        @return rgba(#0891b2, $alpha);
+    } @else if $var==7 {
+        @return rgba(#0e7490, $alpha);
+    } @else if $var==8 {
+        @return rgba(#155e75, $alpha);
+    } @else if $var==9 {
+        @return rgba(#164e63, $alpha);
+    }
+}
+
+@function sky($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#f0f9ff, $alpha);
+    } @else if $var==1 {
+        @return rgba(#e0f2fe, $alpha);
+    } @else if $var==2 {
+        @return rgba(#bae6fd, $alpha);
+    } @else if $var==3 {
+        @return rgba(#7dd3fc, $alpha);
+    } @else if $var==4 {
+        @return rgba(#38bdf8, $alpha);
+    } @else if $var==5 {
+        @return rgba(#0ea5e9, $alpha);
+    } @else if $var==6 {
+        @return rgba(#0284c7, $alpha);
+    } @else if $var==7 {
+        @return rgba(#0369a1, $alpha);
+    } @else if $var==8 {
+        @return rgba(#075985, $alpha);
+    } @else if $var==9 {
+        @return rgba(#0c4a6e, $alpha);
+    }
+}
+
+@function blue($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#eff6ff, $alpha);
+    } @else if $var==1 {
+        @return rgba(#dbeafe, $alpha);
+    } @else if $var==2 {
+        @return rgba(#bfdbfe, $alpha);
+    } @else if $var==3 {
+        @return rgba(#93c5fd, $alpha);
+    } @else if $var==4 {
+        @return rgba(#60a5fa, $alpha);
+    } @else if $var==5 {
+        @return rgba(#3b82f6, $alpha);
+    } @else if $var==6 {
+        @return rgba(#2563eb, $alpha);
+    } @else if $var==7 {
+        @return rgba(#1d4ed8, $alpha);
+    } @else if $var==8 {
+        @return rgba(#1e40af, $alpha);
+    } @else if $var==9 {
+        @return rgba(#1e3a8a, $alpha);
+    }
+}
+
+@function indigo($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#eef2ff, $alpha);
+    } @else if $var==1 {
+        @return rgba(#e0e7ff, $alpha);
+    } @else if $var==2 {
+        @return rgba(#c7d2fe, $alpha);
+    } @else if $var==3 {
+        @return rgba(#a5b4fc, $alpha);
+    } @else if $var==4 {
+        @return rgba(#818cf8, $alpha);
+    } @else if $var==5 {
+        @return rgba(#6366f1, $alpha);
+    } @else if $var==6 {
+        @return rgba(#4f46e5, $alpha);
+    } @else if $var==7 {
+        @return rgba(#4338ca, $alpha);
+    } @else if $var==8 {
+        @return rgba(#3730a3, $alpha);
+    } @else if $var==9 {
+        @return rgba(#312e81, $alpha);
+    }
+}
+
+@function violet($var: 5, $alpha: 1 5) {
+    @if $var==0 {
+        @return rgba(#f5f3ff, $alpha);
+    } @else if $var==1 {
+        @return rgba(#ede9fe, $alpha);
+    } @else if $var==2 {
+        @return rgba(#ddd6fe, $alpha);
+    } @else if $var==3 {
+        @return rgba(#c4b5fd, $alpha);
+    } @else if $var==4 {
+        @return rgba(#a78bfa, $alpha);
+    } @else if $var==5 {
+        @return rgba(#8b5cf6, $alpha);
+    } @else if $var==6 {
+        @return rgba(#7c3aed, $alpha);
+    } @else if $var==7 {
+        @return rgba(#6d28d9, $alpha);
+    } @else if $var==8 {
+        @return rgba(#5b21b6, $alpha);
+    } @else if $var==9 {
+        @return rgba(#4c1d95, $alpha);
+    }
+}
+
+@function purple($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#faf5ff, $alpha);
+    } @else if $var==1 {
+        @return rgba(#f3e8ff, $alpha);
+    } @else if $var==2 {
+        @return rgba(#e9d5ff, $alpha);
+    } @else if $var==3 {
+        @return rgba(#d8b4fe, $alpha);
+    } @else if $var==4 {
+        @return rgba(#c084fc, $alpha);
+    } @else if $var==5 {
+        @return rgba(#a855f7, $alpha);
+    } @else if $var==6 {
+        @return rgba(#9333ea, $alpha);
+    } @else if $var==7 {
+        @return rgba(#7e22ce, $alpha);
+    } @else if $var==8 {
+        @return rgba(#6b21a8, $alpha);
+    } @else if $var==9 {
+        @return rgba(#581c87, $alpha);
+    }
+}
+
+@function fuchsia($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#fdf4ff, $alpha);
+    } @else if $var==1 {
+        @return rgba(#fae8ff, $alpha);
+    } @else if $var==2 {
+        @return rgba(#f5d0fe, $alpha);
+    } @else if $var==3 {
+        @return rgba(#f0abfc, $alpha);
+    } @else if $var==4 {
+        @return rgba(#e879f9, $alpha);
+    } @else if $var==5 {
+        @return rgba(#d946ef, $alpha);
+    } @else if $var==6 {
+        @return rgba(#c026d3, $alpha);
+    } @else if $var==7 {
+        @return rgba(#a21caf, $alpha);
+    } @else if $var==8 {
+        @return rgba(#86198f, $alpha);
+    } @else if $var==9 {
+        @return rgba(#701a75, $alpha);
+    }
+}
+
+@function pink($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#fdf2f8, $alpha);
+    } @else if $var==1 {
+        @return rgba(#fce7f3, $alpha);
+    } @else if $var==2 {
+        @return rgba(#fbcfe8, $alpha);
+    } @else if $var==3 {
+        @return rgba(#f9a8d4, $alpha);
+    } @else if $var==4 {
+        @return rgba(#f472b6, $alpha);
+    } @else if $var==5 {
+        @return rgba(#ec4899, $alpha);
+    } @else if $var==6 {
+        @return rgba(#db2777, $alpha);
+    } @else if $var==7 {
+        @return rgba(#be185d, $alpha);
+    } @else if $var==8 {
+        @return rgba(#9d174d, $alpha);
+    } @else if $var==9 {
+        @return rgba(#831843, $alpha);
+    }
+}
+
+@function rose($var: 5, $alpha: 1) {
+    @if $var==0 {
+        @return rgba(#fff1f2, $alpha);
+    } @else if $var==1 {
+        @return rgba(#ffe4e6, $alpha);
+    } @else if $var==2 {
+        @return rgba(#fecdd3, $alpha);
+    } @else if $var==3 {
+        @return rgba(#fda4af, $alpha);
+    } @else if $var==4 {
+        @return rgba(#fb7185, $alpha);
+    } @else if $var==5 {
+        @return rgba(#f43f5e, $alpha);
+    } @else if $var==6 {
+        @return rgba(#e11d48, $alpha);
+    } @else if $var==7 {
+        @return rgba(#be123c, $alpha);
+    } @else if $var==8 {
+        @return rgba(#9f1239, $alpha);
+    } @else if $var==9 {
+        @return rgba(#881337, $alpha);
+    }
+}
+
+@function red-after($var: 5, $alpha: 1) {
+    @return amber($var, $alpha);
+}
+
+@function orange-after($var: 5, $alpha: 1) {
+    @return yellow($var, $alpha);
+}
+
+@function amber-after($var: 5, $alpha: 1) {
+    @return yellow($var, $alpha);
+}
+
+@function yellow-after($var: 5, $alpha: 1) {
+    @return lime($var, $alpha);
+}
+
+@function lime-after($var: 5, $alpha: 1) {
+    @return emerald($var, $alpha);
+}
+
+@function green-after($var: 5, $alpha: 1) {
+    @return teal($var, $alpha);
+}
+
+@function emerald-after($var: 5, $alpha: 1) {
+    @return cyan($var, $alpha);
+}
+
+@function teal-after($var: 5, $alpha: 1) {
+    @return sky($var, $alpha);
+}
+
+@function cyan-after($var: 5, $alpha: 1) {
+    @return blue($var, $alpha);
+}
+
+@function sky-after($var: 5, $alpha: 1) {
+    @return indigo($var, $alpha);
+}
+
+@function blue-after($var: 5, $alpha: 1) {
+    @return violet($var, $alpha);
+}
+
+@function indigo-after($var: 5, $alpha: 1) {
+    @return purple($var, $alpha);
+}
+
+@function violet-after($var: 5, $alpha: 1) {
+    @return fuchsia($var, $alpha);
+}
+
+@function purple-after($var: 5, $alpha: 1) {
+    @return pink($var, $alpha);
+}
+
+@function fuchsia-after($var: 5, $alpha: 1) {
+    @return rose($var, $alpha);
+}
+
+@function pink-after($var: 5, $alpha: 1) {
+    @return red($var, $alpha);
+}
+
+@function rose-after($var: 5, $alpha: 1) {
+    @return orange($var, $alpha);
+}
+
+@function amber-before($var: 5, $alpha: 1) {
+    @return red($var, $alpha);
+}
+
+@function yellow-before($var: 5, $alpha: 1) {
+    @return orange($var, $alpha);
+}
+
+@function yellow-before($var: 5, $alpha: 1) {
+    @return amber($var, $alpha);
+}
+
+@function lime-before($var: 5, $alpha: 1) {
+    @return yellow($var, $alpha);
+}
+
+@function emerald-before($var: 5, $alpha: 1) {
+    @return lime($var, $alpha);
+}
+
+@function teal-before($var: 5, $alpha: 1) {
+    @return green($var, $alpha);
+}
+
+@function cyan-before($var: 5, $alpha: 1) {
+    @return emerald($var, $alpha);
+}
+
+@function sky-before($var: 5, $alpha: 1) {
+    @return teal($var, $alpha);
+}
+
+@function blue-before($var: 5, $alpha: 1) {
+    @return cyan($var, $alpha);
+}
+
+@function indigo-before($var: 5, $alpha: 1) {
+    @return sky($var, $alpha);
+}
+
+@function violet-before($var: 5, $alpha: 1) {
+    @return blue($var, $alpha);
+}
+
+@function purple-before($var: 5, $alpha: 1) {
+    @return indigo($var, $alpha);
+}
+
+@function fuchsia-before($var: 5, $alpha: 1) {
+    @return violet($var, $alpha);
+}
+
+@function pink-before($var: 5, $alpha: 1) {
+    @return purple($var, $alpha);
+}
+
+@function rose-before($var: 5, $alpha: 1) {
+    @return fuchsia($var, $alpha);
+}
+
+@function red-before($var: 5, $alpha: 1) {
+    @return pink($var, $alpha);
+}
+
+@function orange-before($var: 5, $alpha: 1) {
+    @return rose($var, $alpha);
+}
+
+@function shadow($i: 3, $int: 0.1, $dis: 1) {
+    @if $i==0 {
+        @return 0px 0px 3px rgba(0, 0, 0, $int);
+    }
+    @if $i==1 {
+        @return $dis * 1px $dis * 1px 5px rgba(0, 0, 0, $int);
+    }
+    @if $i==2 {
+        @return $dis * 2px $dis * 1px 7px rgba(0, 0, 0, $int);
+    }
+    @if $i==3 {
+        @return $dis * 2px $dis * 2px 10px rgba(0, 0, 0, $int);
+    }
+    @if $i==4 {
+        @return $dis * 2px $dis * 3px 13px rgba(0, 0, 0, $int);
+    }
+    @if $i==5 {
+        @return $dis * 2px $dis * 4px 16px rgba(0, 0, 0, $int);
+    }
+    @if $i==6 {
+        @return $dis * 2px $dis * 5px 20px rgba(0, 0, 0, $int);
+    }
+    @if $i==7 {
+        @return $dis * 3px $dis * 5px 24px rgba(0, 0, 0, $int);
+    }
+    @if $i==8 {
+        @return $dis * 3px $dis * 7px 28px rgba(0, 0, 0, $int);
+    }
+    @if $i==9 {
+        @return $dis * 3px $dis * 9px 35px rgba(0, 0, 0, $int);
+    }
+}
+
+@function glow($color, $size, $int: 0.5) {
+    @return 0 0 $size rgba($color, $int);
+}
+
+@function border($color, $size, $int: 0.5) {
+    @return 0 0 0 $size rgba($color, $int);
+}
+
+@mixin full-flex {
+    flex: 1;
+}
+
+@mixin content-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin content-align($axis: row) {
+    display: flex;
+    @if $axis==row {
+        align-items: center;
+        flex-direction: row;
+    }
+    @if $axis==column {
+        justify-content: center;
+        flex-direction: column;
+    }
+    @if $axis==center {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@mixin container-full {
+    width: 100%;
+}
+
+@mixin container-huge {
+    width: 90%;
+}
+
+@mixin container-large($max: 100%, $min: 0) {
+    width: 75%;
+    @media screen and (max-width: $screen-tiny) {
+        width: 90%;
+    }
+    min-width: $min;
+    max-width: $max;
+}
+
+@mixin container-medium {
+    width: 75%;
+    max-width: $screen-small;
+    @media screen and (min-width: $screen-large) {
+        max-width: $screen-medium;
+    }
+    @media screen and (max-width: $screen-phone) {
+        width: 90%;
+    }
+}
+
+@mixin container-small {
+    width: 35%;
+    @media screen and (max-width: $screen-medium) {
+        width: 45%;
+    }
+    @media screen and (max-width: $screen-tiny) {
+        width: 75%;
+    }
+    @media screen and (max-width: $screen-phone) {
+        width: 90%;
+    }
+}
+
+@mixin constrain($min: 0, $max: 100%) {
+    max-width: $max;
+    min-width: $min;
+}
+
+@mixin grid($n: 12) {
+    display: grid;
+    grid-template-columns: repeat($n, 1fr);
+}
+
+@mixin grid-auto($min) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax($min, 1fr));
+}
+
+@mixin span-h($n) {
+    grid-row: span $n / auto;
+}
+
+@mixin span-v($n) {
+    grid-column: span $n / auto;
+}
+
+@mixin appearance($value) {
+    -webkit-appearance: $value;
+    -moz-appearance: $value;
+    -ms-appearance: $value;
+    -o-appearance: $value;
+    appearance: $value;
+}
+
+@mixin text-gradient($color1, $color2, $dir: 30deg) {
+    background-clip: text;
+    -moz-background-clip: text;
+    -webkit-background-clip: text;
+    color: #0000;
+    background-image: linear-gradient($dir, $color1, $color2);
+}
