@@ -45,7 +45,18 @@ const useStyles = createStyles((theme, params, getRef) => ({
   // },
 }));
 
-
+const segStyle = {
+  display: "grid",
+  fontSize: "1rem",
+  maxWidth: "37.8rem",
+  gridTemplateColumns: "repeat(auto-fit, minmax(4.2rem, 1fr))",
+  gap: "-10px",
+  marginBottom: "-2rem",
+  marginTop: "1rem",
+  ".mantine-SegmentedControl-active":{
+    margin: "4px 4px"
+  }
+}
 
 function StyledStepper(props: StepperProps) {
   const { classes } = useStyles();
@@ -129,7 +140,7 @@ const Home : NextPage = () => {
         <Stepper.Step label="Третий курс">
           <Timeline active={5} bulletSize={24} lineWidth={2} style={{marginLeft: 6}}>
               <Timeline.Item bullet={<GitFork size={16}/>} title="Кафедра">
-                <SegmentedControl color="blue" onChange={setCaf} value={caf} data={[
+                <SegmentedControl sx={(theme)=>(segStyle)} color="blue" onChange={setCaf} value={caf} data={[
                     {label: "ИСАН", value: "1"},
                     {label: "ИФП", value: "2"},
                     {label: "ИФТТ", value: "3"},
@@ -137,16 +148,100 @@ const Home : NextPage = () => {
                     {label: "ИТФ", value: "5"},
                     {label: "ИОФ", value: "6"},
                     {label: "ИРЭ", value: "7"},
+                    {label: "ПСФ", value: "8"},
                   ]}/><br/>
               </Timeline.Item>
               <Timeline.Item bullet={<CalendarEvent size={16}/>} title="Пятый модуль">
-                ??
+                      Математическая физика
+                <br/> Квантовая физика
+                <br/> Атомная и ядерная физика
+                <br/> Введение в астрофизику
+                <br/> Квантовая механика
+                <br/> <hr style={{maxWidth: 100}}/>
+                {caf=="1" /* ИСАН */ && <>
+                      Методы экспериментальной оптики
+                <br/> Квантовая оптика и фотоника
+                </>}
+                {caf=="2" /* ИФП */ && <>
+                      Термодинамика и статическая физика
+                <br/> Физика низких температур
+                <br/> Методы измерений
+                </>}
+                {caf=="3" /* ИФТТ */ && <>
+                      Дифракционные методы
+                <br/> Введение в физику поверхности
+                <br/> Высоковакуумная техника
+                <br/> Рентген и электромагнетизм
+                </>}
+                {caf=="4" /* ИКИ */ && <>
+                      Космическая и газовая динамика
+                <br/> Солнечная система
+                <br/> Научная литература
+                </>}
+                {caf=="5" /* ИТФ */ && <>
+                      Дополнительная математическая физика
+                <br/> Стохастические процессы
+                <br/> Нелинейные процессы
+                </>}
+                {caf=="6" /* ИОФ */ && <>
+                      Физика твердого тела
+                <br/> Лазерная спектроскопия
+                </>}
+                {caf=="7" /* ИРЭ */ && <>
+                      Симметрии в теории групп
+                <br/> Основы магнетизма
+                <br/> Микро- и наноразмерные устройства
+                <br/> Методы электрофизических измерений
+                </>}
+                {caf=="8" /* ПСФ */ && <>
+                      Психология обучения 
+                <br/> Методы преподавания физики
+                </>}
               </Timeline.Item>
               <Timeline.Item bullet={<Math size={16}/>}title="Промежуточная сессия" lineVariant='dashed'>
 
               </Timeline.Item>
               <Timeline.Item bullet={<CalendarEvent size={16}/>} title="Шестой модуль">
-                ??
+                Введение в физику твердого тела
+                <br/> Физика мягкой материи
+                <br/> Основы современной физики
+                <br/> Статистическая физика
+                <br/> <hr style={{maxWidth: 100}}/>
+                {caf=="1" /* ИСАН */ && <>
+                      Методы экспериментальной оптики
+                <br/> Квантовая оптика и фотоника
+                </>}
+                {caf=="2" /* ИФП */ && <>
+                      Термодинамика и статическая физика
+                <br/> Физика низких температур
+                </>}
+                {caf=="3" /* ИФТТ */ && <>
+                      Дифракционные методы
+                <br/> Энергетические спектры
+                <br/> Техника физического эксперимента
+                </>}
+                {caf=="4" /* ИКИ */ && <>
+                      Основы кинетической теории газов
+                <br/> Основы физики плазмы
+                </>}
+                {caf=="5" /* ИТФ */ && <>
+                      Теория хаотических систем
+                <br/> Ланжевеновская динамика и кинетика
+                </>}
+                {caf=="6" /* ИОФ */ && <>
+                      Квантовая теория информации
+                <br/> Зондовая микроскопия
+                <br/> Электронная спектроскопия
+                </>}
+                {caf=="7" /* ИРЭ */ && <>
+                      Наномагнетизм и спинтроника 
+                <br/> Кинетика электронов в твердых телах
+                </>}
+                {caf=="8" /* ПСФ */ && <>
+                      Основы проектирования
+                <br/> Методы преподавания физики
+                <br/> Педагогическая мастерская
+                </>}
               </Timeline.Item>
               <Timeline.Item bullet={<Math size={16}/>} title="Итоговая сессия" lineVariant='dashed'>
 
@@ -159,7 +254,7 @@ const Home : NextPage = () => {
         <Stepper.Step label="Четвертый курс">
           <Timeline active={5} bulletSize={24} lineWidth={2} style={{marginLeft: 6}}>
               <Timeline.Item bullet={<GitFork size={16}/>} title="Кафедра">
-                <SegmentedControl color="blue" onChange={setCaf} value={caf} data={[
+                <SegmentedControl sx={(theme)=>(segStyle)} color="blue" onChange={setCaf} value={caf} data={[
                     {label: "ИСАН", value: "1"},
                     {label: "ИФП", value: "2"},
                     {label: "ИФТТ", value: "3"},
@@ -167,16 +262,21 @@ const Home : NextPage = () => {
                     {label: "ИТФ", value: "5"},
                     {label: "ИОФ", value: "6"},
                     {label: "ИРЭ", value: "7"},
+                    {label: "ПСФ", value: "8"},
                   ]}/><br/>
               </Timeline.Item>
               <Timeline.Item bullet={<CalendarEvent size={16}/>} title="Седьмой модуль">
-                ??
+                Физика сплошных сред
+                <br/> <hr style={{maxWidth: 100}}/>
+                Нет данных
               </Timeline.Item>
               <Timeline.Item bullet={<Math size={16}/>}title="Промежуточная сессия" lineVariant='dashed'>
 
               </Timeline.Item>
               <Timeline.Item bullet={<CalendarEvent size={16}/>} title="Восьмой модуль">
-                ??
+                Электродинамика конденсированных сред
+                <br/> <hr style={{maxWidth: 100}}/>
+                Нет данных
               </Timeline.Item>
               <Timeline.Item bullet={<Math size={16}/>}title="Итоговая сессия" lineVariant='dashed'>
 
