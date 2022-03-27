@@ -22,10 +22,8 @@ const other : NextPage = () => {
             borderColor: theme.colors.dark[2]
           },
           ".mantine-Timeline-itemBullet": {
-            // border: `2px solid ${theme.colors.blue[6]}`,
+            border: `2px solid ${theme.colors.blue[6]}`,
             // background: "#fff"
-            background: theme.colors.dark[3],
-            color: "#fff"
           }
         })}>
         <Timeline.Item bullet={<Circle size={16}/>} title="План разработки">
