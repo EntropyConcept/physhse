@@ -27,7 +27,7 @@
                 transition: 0.3s;
                 @include appearance(none);
                 border: none;
-                border-bottom: 2px solid gray(3);
+                border-bottom: 2px solid gray(3, 0);
                 outline: none;
                 font-size: 1rem;
                 background: none;
