@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import TimelineCaf from '../components/Timeline/timelineCaf'
 import { AspectRatio, Accordion } from '@mantine/core'
 import style from "../styles/main.module.scss"
+import depart from "../public/departments.json"
 
 const accStyle = {
   margin: "-1rem", 
@@ -11,7 +12,6 @@ const accStyle = {
 }
 
 const Home: NextPage = () => {
-
   return (
     <div className={style.wrapper}>
       <div className={style.side}>
@@ -27,12 +27,7 @@ const Home: NextPage = () => {
             </Accordion.Item>
             <Accordion.Item label="Кафедры">
               <ul>
-                <li><a href="https://physics.hse.ru/issp/">Физика конденсированных сред</a></li>
-                <li><a href="https://physics.hse.ru/kapitza/">Физика низких температур</a></li>
-                <li><a href="https://physics.hse.ru/itp/">Теоретическая физика</a></li>
-                <li><a href="https://physics.hse.ru/iki/">Физика космоса</a></li>
-                <li><a href="https://physics.hse.ru/isan">Квантовая оптика и нанофотоника</a></li>
-                <li><a href="https://physics.hse.ru/gpi/">Квантовые технологии</a></li>
+                {depart.map((d)=>{if (d.link) return <li key={d.name}><a href={d.link}>{d.subject}</a></li>})}
               </ul>
             </Accordion.Item>
           </Accordion>
@@ -48,85 +43,14 @@ const Home: NextPage = () => {
         <div className={style.hr}></div>
         <div className={style.panel}>
           <Accordion style={accStyle} iconPosition='right'>
-            <Accordion.Item label="ИФТТ">
-              <b>Институт физики твердого тела РАН</b>
-              <br />
-              Направления подготовки:
-              <ul>
-                <li>Физика и технология полупроводниковыхи гибридных нано- и гетероструктур</li>
-                <li>Физика когерентных электронных систем</li>
-                <li>Физика нелинейных явлений в конденсированных средах</li>
-                <li>Физическое материаловедение</li>
-              </ul>
-            </Accordion.Item>
-            <Accordion.Item label="ИФП">
-              <b>Институт физических проблем им. П.Л. Капицы РАН</b>
-              <br />
-              Направления подготовки:
-              <ul>
-                <li>Квантовые жидкости и кристаллы</li>
-                <li>Сверхпроводимость</li>
-                <li>Физика поверхности</li>
-                <li>Низкотемпературный магнетизм</li>
-              </ul>
-            </Accordion.Item>
-            <Accordion.Item label="ИТФ">
-              <b>Институт теоретической физики им. Л.Д. Ландау РАН</b>
-              <br />
-              Направления подготовки:
-              <ul>
-                <li>Физика конденсированного состояния</li>
-                <li>Сверхпроводимость и сверхтекучесть</li>
-                <li>Физические явления в низкоразмерныхи мезоскопических системах</li>
-                <li>Нелинейная динамика и турбулентность</li>
-                <li>Астрофизика и космология</li>
-                <li>Физика квантовых вычислений</li>
-                <li>Вычислительная физика</li>
-              </ul>
-            </Accordion.Item>
-            <Accordion.Item label="ИКИ">
-              <b>Институт космических исследований РАН</b>
-              <br />
-              Направления подготовки:
-              <ul>
-                <li>Астрофизика высоких энергий</li>
-                <li>Физика космической плазмы</li>
-                <li>Физика Солнца</li>
-              </ul>
-            </Accordion.Item>
-            <Accordion.Item label="ИСАН">
-              <b>Институт спектроскопии РАН</b>
-              <br />
-              Направления подготовки:
-              <ul>
-                <li>Спектроскопия атомов, молекул и конденсированных сред</li>
-                <li>Квантовая оптика, оптика наноструктур, плазмоника, оптика ближнего поля</li>
-                <li>Лазерная спектроскопия в физике, фотохимии, аналитической химии</li>
-                <li>Аналитическая спектроскопия и разработка приборов для исследований</li>
-              </ul>
-            </Accordion.Item>
-            <Accordion.Item label="ИОФ">
-              <b>Институт общей физики</b>
-              <br />
-              Направления подготовки:
-              <ul>
-                <li>Создание и управление элементами квантовых компьютеров</li>
-                <li>Создание и управление сетями квантовых коммуникаций</li>
-                <li>Квантовые вычисления</li>
-                <li>Сверхкороткие лазерные импульсы и сверхмощные электромагнитные поля</li>
-                <li>Наномагнетизм и спинтроника</li>
-              </ul>
-            </Accordion.Item>
-            <Accordion.Item label="ИРЭ">
-              <b>Институт радиофизики</b>
-              <br />
-              Направления подготовки:
-              <ul>
-                <li>Изучение магнетизма</li>
-                <li>Наномагнетизм, спинтроника и спин-фотоника</li>
-                <li>Магнитооптика и оптомагнетизм</li>
-              </ul>
-            </Accordion.Item>
+            {depart.map((d) => {
+              return <Accordion.Item label={d.name} key={d.name}>
+                <b>{d.fullName}</b><br/>Направления подготовки:
+                <ul>{d.fields.map((f) => {
+                    return <li key={d.fields.indexOf(f)}>{f}</li>
+                  })}</ul>
+              </Accordion.Item>
+            })}
           </Accordion>
         </div>
       </div>

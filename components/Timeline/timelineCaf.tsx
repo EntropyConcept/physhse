@@ -71,7 +71,7 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
       <StyledStepper active={active} onStepClick={setActive} breakpoint="sm" >
         <Stepper.Step label="Первый курс">
           <Timeline active={4} bulletSize={24} lineWidth={2} style={{ marginLeft: 6 }}>
-            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Первый модуль">
+            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Первый семестр">
               Математический анализ<br />
               Математический аппарат<br />
               Линейная алгебра<br />
@@ -85,7 +85,7 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
               <br /><Text variant="link" component="span" inherit>26.12</Text> Математический анализ
               <br /><Text variant="link" component="span" inherit>27.12</Text> Математический аппарат
             </Timeline.Item>
-            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Второй модуль">
+            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Второй семестр">
               Аналитические приближенные методы<br />
               Математический анализ<br />
               Электромагнетизм<br />
@@ -102,7 +102,7 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
         </Stepper.Step>
         <Stepper.Step label="Второй курс">
           <Timeline active={4} bulletSize={24} lineWidth={2} style={{ marginLeft: 6 }}>
-            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Третий модуль">
+            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Третий семестр">
               Вычислительная физика<br />
               Математический анализ<br />
               Теория вероятностей<br />
@@ -114,7 +114,7 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
             <Timeline.Item bullet={<Math size={16} />} title="Промежуточная сессия" lineVariant='dotted' color="blue">
               <Text variant="link" component="span" inherit>00.00</Text> Нет данных
             </Timeline.Item>
-            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Четвертый модуль">
+            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Четвертый семестр">
               Химия для физиков<br />
               Квантовая физика<br />
               Математическая физика<br />
@@ -142,9 +142,18 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
                 { label: "ИРЭ", value: "caf7" },
                 { label: "ПСФ", value: "caf8" },
                 { label: "Все", value: "caf9" }
-              ]} /><br />
+              ]} /><br /><br />
+              {caf == "caf1" && <a href="#" style={{color: "#1c7ed6"}}>Институт спектроскопии</a>}
+              {caf == "caf2" && <a href="#" style={{color: "#1c7ed6"}}>Институт физических проблем им. П.Л. Капицы</a>}
+              {caf == "caf3" && <a href="#" style={{color: "#1c7ed6"}}>Институт физики твердого тела</a>}
+              {caf == "caf4" && <a href="#" style={{color: "#1c7ed6"}}>Институт космических исследований</a>}
+              {caf == "caf5" && <a href="#" style={{color: "#1c7ed6"}}>Институт теоретической физики им. Л.Д. Ландау</a>}
+              {caf == "caf6" && <a href="#" style={{color: "#1c7ed6"}}>Институт общей физики</a>}
+              {caf == "caf7" && <a href="#" style={{color: "#1c7ed6"}}>Институт радиофизики</a>}
+              {caf == "caf8" && <a href="#" style={{color: "#1c7ed6"}}>Институт педагогического мастерства</a>}
+              {caf == "caf9" && <a href="#" style={{color: "#1c7ed6"}}>Все институты</a>}
             </Timeline.Item>
-            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Пятый модуль">
+            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Пятый семестр">
               Математическая физика
               <br /> Квантовая физика
               <br /> Атомная и ядерная физика
@@ -194,7 +203,7 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
             <Timeline.Item bullet={<Math size={16} />} title="Промежуточная сессия" lineVariant='dotted' color="blue">
               <Text variant="link" component="span" inherit>00.00</Text> Нет данных
             </Timeline.Item>
-            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Шестой модуль">
+            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Шестой семестр">
               Введение в физику твердого тела
               <br /> Физика мягкой материи
               <br /> Основы современной физики
@@ -256,16 +265,25 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
                 { label: "ИРЭ", value: "caf7" },
                 { label: "ПСФ", value: "caf8" },
                 { label: "Все", value: "caf9" }
-              ]} /><br />
+              ]} /><br /><br/>
+              {caf == "caf1" && <a href="#" style={{color: "#1c7ed6"}}>Институт спектроскопии</a>}
+              {caf == "caf2" && <a href="#" style={{color: "#1c7ed6"}}>Институт физических проблем им. П.Л. Капицы</a>}
+              {caf == "caf3" && <a href="#" style={{color: "#1c7ed6"}}>Институт физики твердого тела</a>}
+              {caf == "caf4" && <a href="#" style={{color: "#1c7ed6"}}>Институт космических исследований</a>}
+              {caf == "caf5" && <a href="#" style={{color: "#1c7ed6"}}>Институт теоретической физики им. Л.Д. Ландау</a>}
+              {caf == "caf6" && <a href="#" style={{color: "#1c7ed6"}}>Институт общей физики</a>}
+              {caf == "caf7" && <a href="#" style={{color: "#1c7ed6"}}>Институт радиофизики</a>}
+              {caf == "caf8" && <a href="#" style={{color: "#1c7ed6"}}>Институт педагогического мастерства</a>}
+              {caf == "caf9" && <a href="#" style={{color: "#1c7ed6"}}>Все институты</a>}
             </Timeline.Item>
-            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Седьмой модуль">
+            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Седьмой семестр">
               Физика сплошных сред
               <br/> Нет данных
             </Timeline.Item>
             <Timeline.Item bullet={<Math size={16} />} title="Промежуточная сессия" lineVariant='dotted' color="blue">
               <Text variant="link" component="span" inherit>00.00</Text> Нет данных
             </Timeline.Item>
-            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Восьмой модуль">
+            <Timeline.Item bullet={<CalendarEvent size={16} />} title="Восьмой семестр">
               Электродинамика конденсированных сред
               <br/> Нет данных
             </Timeline.Item>
