@@ -49,14 +49,10 @@ const useStyles = createStyles((theme, params, getRef) => ({
 const segStyle = {
   display: "flex",
   fontSize: "1rem",
-  flexWrap: "wrap",
+  flexFlow: "row wrap",
   marginBottom: "-2rem",
   marginTop: "1rem",
   maxWidth: "36rem",
-  ".mantine-SegmentedControl-control":{
-    // maxWidth: "4rem"
-    border: "none"
-  },
 }
 
 function StyledStepper(props: StepperProps) {
