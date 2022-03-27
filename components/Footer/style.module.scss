@@ -1,0 +1,10 @@
+@import "../../styles/vars.scss";
+
+.wrapper {
+    justify-items: flex-end;
+    margin-top: auto;
+    padding: 2rem;
+    width: 100%;
+    border-top: 2px solid gray(3);
+    @include content-center;
+}
