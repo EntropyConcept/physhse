@@ -39,7 +39,7 @@ const useStyles = createStyles((theme, params, getRef) => ({
     border: "1px solid #0002",
     borderRadius: ".4rem",
     background: "#f4f4f5"
-  }
+  },
 }));
 
 
