@@ -4,7 +4,7 @@ import { CalendarEvent, Math, ArrowForward, Atom2, GitFork, GitCommit, BorderRad
 
 const useStyles = createStyles((theme, params, getRef) => ({
   root: {
-    padding: theme.spacing.md,
+    padding: 0,
     width: '100%',
     maxWidth: 1000
   },
@@ -37,7 +37,7 @@ const useStyles = createStyles((theme, params, getRef) => ({
   steps: {
     padding: "1rem",
     border: "1px solid #0002",
-    borderRadius: ".4rem",
+    borderRadius: ".5rem",
     background: "#f4f4f5"
   },
 }));
