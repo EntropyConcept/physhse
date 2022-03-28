@@ -82,6 +82,7 @@ const Header : FunctionComponent<Props> = (props:Props) => {
                     <Link passHref href="/c3"><button className={classNames({[style.selected]:props.tab == 3 || dir[1] == "c3"})}>Курс 3</button></Link>
                     <Link passHref href="/c4"><button className={classNames({[style.selected]:props.tab == 4 || dir[1] == "c4"})}>Курс 4</button></Link>
                     <Link passHref href="/other"><button className={classNames({[style.selected]:props.tab == 5 || dir[1] == "other"})}>Другое</button></Link>
+                    <Link passHref href="/dev"><button className={classNames({[style.selected]:props.tab == 6 || dir[1] == "dev"})}>Разработка</button></Link>
                   </div>
               </div>
               <div className={style.right}>
