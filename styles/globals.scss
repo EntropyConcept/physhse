@@ -133,6 +133,10 @@ h6 {
 a {
     text-decoration: none;
     color: inherit;
+    color: mix(cyan(), blue(), 60%);
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 body.dark {

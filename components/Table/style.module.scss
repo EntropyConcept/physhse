@@ -25,13 +25,17 @@ $static: mix(gray(2), gray(1));
         justify-content: space-between;
         .entry {
             flex: 1;
-            min-width: 19rem;
+            min-width: 10rem;
             white-space: nowrap;
+            text-overflow: ellipsis;
             transition: 0.3s;
             outline: 1px solid gray(3);
             padding: 0.5rem 1rem;
             &:hover {
                 background: #fff;
+            }
+            @media screen and (max-width: 600px) {
+                padding: 1rem;
             }
         }
     }
