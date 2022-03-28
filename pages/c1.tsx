@@ -34,7 +34,7 @@ const c2 : NextPage = ()=>{
             </Panel>,
             <Panel overflow='hidden' padding={0} key="2">
                 <Accordion multiple>
-                    <Accordion.Item label='Олимпиады'>В процессе обработки</Accordion.Item>
+                    <Accordion.Item label='Майноры'>В процессе обработки</Accordion.Item>
                     <Accordion.Item label='Школы'>В процессе обработки</Accordion.Item>
                     <Accordion.Item label='Другие материалы'>В процессе обработки</Accordion.Item>
                 </Accordion>
