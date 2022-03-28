@@ -1,0 +1,53 @@
+@import "../../styles/vars.scss";
+$static: mix(gray(2), gray(1));
+
+.wrapper {
+    width: 100%;
+    @include content-center;
+    .table {
+        padding: 0;
+        border-radius: 0;
+        @include content-center;
+        align-items: center;
+        border: 1px solid gray(3);
+        background: gray(1);
+        @include container-medium;
+        overflow: hidden;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+        .entry {
+            flex: 1;
+            min-width: 19rem;
+            white-space: nowrap;
+            transition: 0.3s;
+            outline: 1px solid gray(3);
+            padding: 0.5rem 1rem;
+            &:hover {
+                background: #fff;
+            }
+        }
+    }
+    .table.top {
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+    .table.bottom {
+        border-radius: 0 0 0.5rem 0.5rem;
+    }
+    .table.top.bottom {
+        border-radius: 0.5rem;
+    }
+    .table.static {
+        .entry {
+            background: $static;
+            &:hover {
+                background: $static;
+            }
+        }
+    }
+    .table.nolines {
+        .entry {
+            outline: none;
+        }
+    }
+}

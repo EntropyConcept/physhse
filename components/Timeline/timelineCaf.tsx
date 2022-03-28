@@ -1,6 +1,7 @@
 import { useState, FunctionComponent } from "react"
 import { Stepper, StepperProps, createStyles, useMantineTheme, Timeline, SegmentedControl, Text } from '@mantine/core';
 import { CalendarEvent, Math, ArrowForward, Atom2, GitFork, GitCommit, BorderRadius } from 'tabler-icons-react';
+import depart from "../../public/departments.json"
 
 const useStyles = createStyles((theme, params, getRef) => ({
   root: {
@@ -143,15 +144,9 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
                 { label: "ПСФ", value: "caf8" },
                 { label: "Все", value: "caf9" }
               ]} /><br /><br />
-              {caf == "caf1" && <a href="#" style={{color: "#1c7ed6"}}>Институт спектроскопии</a>}
-              {caf == "caf2" && <a href="#" style={{color: "#1c7ed6"}}>Институт физических проблем им. П.Л. Капицы</a>}
-              {caf == "caf3" && <a href="#" style={{color: "#1c7ed6"}}>Институт физики твердого тела</a>}
-              {caf == "caf4" && <a href="#" style={{color: "#1c7ed6"}}>Институт космических исследований</a>}
-              {caf == "caf5" && <a href="#" style={{color: "#1c7ed6"}}>Институт теоретической физики им. Л.Д. Ландау</a>}
-              {caf == "caf6" && <a href="#" style={{color: "#1c7ed6"}}>Институт общей физики</a>}
-              {caf == "caf7" && <a href="#" style={{color: "#1c7ed6"}}>Институт радиофизики</a>}
-              {caf == "caf8" && <a href="#" style={{color: "#1c7ed6"}}>Институт педагогического мастерства</a>}
-              {caf == "caf9" && <a href="#" style={{color: "#1c7ed6"}}>Все институты</a>}
+              {depart.map((d) => {
+                if (d.num.toString() === caf.charAt(3)) return <a key={d.num} href={d.link} style={{color: "#1c7ed6"}}>{d.fullName}</a>
+              })}
             </Timeline.Item>
             <Timeline.Item bullet={<CalendarEvent size={16} />} title="Пятый семестр">
               Математическая физика
@@ -160,46 +155,13 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
               <br /> Введение в астрофизику
               <br /> Квантовая механика
             </Timeline.Item>
-            {(caf == "caf1" || caf == "caf9") /* ИСАН */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИСАН" lineVariant='dotted'>
-              Методы экспериментальной оптики
-              <br /> Квантовая оптика и фотоника
-            </Timeline.Item>
-            }
-            {(caf == "caf2" || caf == "caf9") /* ИФП */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИФП" lineVariant='dotted'>
-              Термодинамика и статическая физика
-              <br /> Физика низких температур
-              <br /> Методы измерений
-            </Timeline.Item>}
-            {(caf == "caf3" || caf == "caf9") /* ИФТТ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИФТТ" lineVariant='dotted'>
-              Дифракционные методы
-              <br /> Введение в физику поверхности
-              <br /> Высоковакуумная техника
-              <br /> Рентген и электромагнетизм
-            </Timeline.Item>}
-            {(caf == "caf4" || caf == "caf9") /* ИКИ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИКИ" lineVariant='dotted'>
-              Космическая и газовая динамика
-              <br /> Солнечная система
-              <br /> Научная литература
-            </Timeline.Item>}
-            {(caf == "caf5" || caf == "caf9") /* ИТФ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИТФ" lineVariant='dotted'>
-              Дополнительная математическая физика
-              <br /> Стохастические процессы
-              <br /> Нелинейные процессы
-            </Timeline.Item>}
-            {(caf == "caf6" || caf == "caf9") /* ИОФ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИОФ" lineVariant='dotted'>
-              Физика твердого тела
-              <br /> Лазерная спектроскопия
-            </Timeline.Item>}
-            {(caf == "caf7" || caf == "caf9") /* ИРЭ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИРЭ" lineVariant='dotted'>
-              Симметрии в теории групп
-              <br /> Основы магнетизма
-              <br /> Микро- и наноразмерные устройства
-              <br /> Методы электрофизических измерений
-            </Timeline.Item>}
-            {(caf == "caf8" || caf == "caf9") /* ПСФ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ПСФ" lineVariant='dotted'>
-              Психология обучения
-              <br /> Методы преподавания физики
-            </Timeline.Item>}
+            {depart.map((d) => {
+              if (d.num.toString() === caf.charAt(3) || caf === "caf9") return <Timeline.Item key={d.num} bullet={<GitCommit size={16}/>} title={d.name} lineVariant="dotted">
+                {d.program["5"].map((p) => {
+                  return <div key={p}>{p}</div>
+                })}
+              </Timeline.Item>
+            })}
             <Timeline.Item bullet={<Math size={16} />} title="Промежуточная сессия" lineVariant='dotted' color="blue">
               <Text variant="link" component="span" inherit>00.00</Text> Нет данных
             </Timeline.Item>
@@ -209,41 +171,13 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
               <br /> Основы современной физики
               <br /> Статистическая физика
             </Timeline.Item>
-            {(caf == "caf1" || caf == "caf9") /* ИСАН */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИСАН" lineVariant='dotted'>
-              Методы экспериментальной оптики
-              <br /> Квантовая оптика и фотоника
-            </Timeline.Item>}
-            {(caf == "caf2" || caf == "caf9") /* ИФП */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИФП" lineVariant='dotted'>
-              Термодинамика и статическая физика
-              <br /> Физика низких температур
-            </Timeline.Item>}
-            {(caf == "caf3" || caf == "caf9") /* ИФТТ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИФТТ" lineVariant='dotted'>
-              Дифракционные методы
-              <br /> Энергетические спектры
-              <br /> Техника физического эксперимента
-            </Timeline.Item>}
-            {(caf == "caf4" || caf == "caf9") /* ИКИ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИКИ" lineVariant='dotted'>
-              Основы кинетической теории газов
-              <br /> Основы физики плазмы
-            </Timeline.Item>}
-            {(caf == "caf5" || caf == "caf9") /* ИТФ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИТФ" lineVariant='dotted'>
-              Теория хаотических систем
-              <br /> Ланжевеновская динамика и кинетика
-            </Timeline.Item>}
-            {(caf == "caf6" || caf == "caf9") /* ИОФ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИОФ" lineVariant='dotted'>
-              Квантовая теория информации
-              <br /> Зондовая микроскопия
-              <br /> Электронная спектроскопия
-            </Timeline.Item>}
-            {(caf == "caf7" || caf == "caf9") /* ИРЭ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ИРЭ" lineVariant='dotted'>
-              Наномагнетизм и спинтроника
-              <br /> Кинетика электронов в твердых телах
-            </Timeline.Item>}
-            {(caf == "caf8" || caf == "caf9") /* ПСФ */ && <Timeline.Item bullet={<GitCommit size={16} />} title="ПСФ" lineVariant='dotted'>
-              Основы проектирования
-              <br /> Методы преподавания физики
-              <br /> Педагогическая мастерская
-            </Timeline.Item>}
+            {depart.map((d) => {
+              if (d.num.toString() === caf.charAt(3) || caf === "caf9") return <Timeline.Item key={d.num} bullet={<GitCommit size={16}/>} title={d.name} lineVariant="dotted">
+                {d.program["6"].map((p) => {
+                  return <div key={p}>{p}</div>
+                })}
+              </Timeline.Item>
+            })}
             <Timeline.Item bullet={<Math size={16} />} title="Итоговая сессия" lineVariant='dotted' color="blue">
               <Text variant="link" component="span" inherit>00.00</Text> Нет данных
             </Timeline.Item>
@@ -266,27 +200,33 @@ const TimelineCaf : FunctionComponent<Props> = (props : Props) => {
                 { label: "ПСФ", value: "caf8" },
                 { label: "Все", value: "caf9" }
               ]} /><br /><br/>
-              {caf == "caf1" && <a href="#" style={{color: "#1c7ed6"}}>Институт спектроскопии</a>}
-              {caf == "caf2" && <a href="#" style={{color: "#1c7ed6"}}>Институт физических проблем им. П.Л. Капицы</a>}
-              {caf == "caf3" && <a href="#" style={{color: "#1c7ed6"}}>Институт физики твердого тела</a>}
-              {caf == "caf4" && <a href="#" style={{color: "#1c7ed6"}}>Институт космических исследований</a>}
-              {caf == "caf5" && <a href="#" style={{color: "#1c7ed6"}}>Институт теоретической физики им. Л.Д. Ландау</a>}
-              {caf == "caf6" && <a href="#" style={{color: "#1c7ed6"}}>Институт общей физики</a>}
-              {caf == "caf7" && <a href="#" style={{color: "#1c7ed6"}}>Институт радиофизики</a>}
-              {caf == "caf8" && <a href="#" style={{color: "#1c7ed6"}}>Институт педагогического мастерства</a>}
-              {caf == "caf9" && <a href="#" style={{color: "#1c7ed6"}}>Все институты</a>}
+              {depart.map((d) => {
+                if (d.num.toString() === caf.charAt(3)) return <a key={d.num} href={d.link} style={{color: "#1c7ed6"}}>{d.fullName}</a>
+              })}
             </Timeline.Item>
             <Timeline.Item bullet={<CalendarEvent size={16} />} title="Седьмой семестр">
               Физика сплошных сред
-              <br/> Нет данных
             </Timeline.Item>
+            {depart.map((d) => {
+              if (d.num.toString() === caf.charAt(3) || caf === "caf9") return <Timeline.Item key={d.num} bullet={<GitCommit size={16}/>} title={d.name} lineVariant="dotted">
+                {d.program["7"].map((p) => {
+                  return <div key={p}>{p}</div>
+                })}
+              </Timeline.Item>
+            })}
             <Timeline.Item bullet={<Math size={16} />} title="Промежуточная сессия" lineVariant='dotted' color="blue">
               <Text variant="link" component="span" inherit>00.00</Text> Нет данных
             </Timeline.Item>
             <Timeline.Item bullet={<CalendarEvent size={16} />} title="Восьмой семестр">
               Электродинамика конденсированных сред
-              <br/> Нет данных
             </Timeline.Item>
+            {depart.map((d) => {
+              if (d.num.toString() === caf.charAt(3) || caf === "caf9") return <Timeline.Item key={d.num} bullet={<GitCommit size={16}/>} title={d.name} lineVariant="dotted">
+                {d.program["8"].map((p) => {
+                  return <div key={p}>{p}</div>
+                })}
+              </Timeline.Item>
+            })}
             <Timeline.Item bullet={<Math size={16} />} title="Итоговая сессия" lineVariant='dotted' color="blue">
               <Text variant="link" component="span" inherit>00.00</Text> Нет данных
             </Timeline.Item>
