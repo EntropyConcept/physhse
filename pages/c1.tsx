@@ -26,14 +26,14 @@ const c2 : NextPage = ()=>{
         <hr />
         <Columns cols="20rem" content={[
             <Panel overflow='hidden' padding={0} key="1">
-                <Accordion>
+                <Accordion multiple>
                     <Accordion.Item label='Сайты вышки'>В процессе обработки</Accordion.Item>
                     <Accordion.Item label='Расписание'>В процессе обработки</Accordion.Item>
                     <Accordion.Item label='Академические возможности'>В процессе обработки</Accordion.Item>
                 </Accordion>
             </Panel>,
             <Panel overflow='hidden' padding={0} key="2">
-                <Accordion>
+                <Accordion multiple>
                     <Accordion.Item label='Олимпиады'>В процессе обработки</Accordion.Item>
                     <Accordion.Item label='Школы'>В процессе обработки</Accordion.Item>
                     <Accordion.Item label='Другие материалы'>В процессе обработки</Accordion.Item>
