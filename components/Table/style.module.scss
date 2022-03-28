@@ -25,8 +25,9 @@ $static: mix(gray(2), gray(1));
         justify-content: space-between;
         .entry {
             flex: 1;
-            min-width: 10rem;
+            min-width: 15rem;
             white-space: nowrap;
+            overflow: hidden;
             text-overflow: ellipsis;
             transition: 0.3s;
             outline: 1px solid gray(3);
@@ -35,7 +36,13 @@ $static: mix(gray(2), gray(1));
                 background: #fff;
             }
             @media screen and (max-width: 600px) {
-                padding: 1rem;
+                padding: 0.75rem 1rem;
+            }
+        }
+        .link {
+            color: mix(cyan(), blue(), 60%);
+            &:hover {
+                text-decoration: underline;
             }
         }
     }

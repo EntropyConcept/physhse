@@ -8,7 +8,7 @@ const c2 : NextPage = ()=>{
     return <>
         <Table top static data={[{name: "Первый семестр"}]}/>
         <Table data={[
-            {name: "Математический анализ", link:""},
+            {name: "Математический анализ"},
             {name: "Математический аппарат"},
             {name: "Линейная алгебра"},
             {name: "Механика"},

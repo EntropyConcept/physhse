@@ -22,7 +22,7 @@ const Table : FunctionComponent<Props> = (props: Props) => {
         <div className={classNames(style.table, {[style.top]: props.top, [style.bottom]: props.bottom, [style.static]: props.static, [style.nolines]: props.nolines})}>
             {props.data.map((d)=>{
                 if (d.link){
-                    return <Link key={d.name} passHref href={d.link?d.link:"#"}><div className={style.entry}>{d.content?d.content:d.name}</div></Link>
+                    return <Link key={d.name} passHref href={d.link?d.link:"#"}><div className={classNames(style.entry, style.link)}>{d.content?d.content:d.name}</div></Link>
                 }
                 return <div key={d.name} className={style.entry}>{d.content?d.content:d.name}</div>
             })}
