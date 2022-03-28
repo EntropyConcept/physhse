@@ -12,6 +12,13 @@ $static: mix(gray(2), gray(1));
         border: 1px solid gray(3);
         background: gray(1);
         @include container-medium;
+        @media screen and (max-width: 1000px) {
+            @include container-huge;
+        }
+        @media screen and (max-width: 600px) {
+            @include container-full;
+            margin: 0 1rem;
+        }
         overflow: hidden;
         flex-wrap: wrap;
         flex-direction: row;

@@ -48,10 +48,13 @@
 @media screen and (max-width: 950px) {
     .wrapper {
         display: flex;
+        flex-wrap: wrap;
         // align-items: center;
+        flex-direction: column;
         justify-content: center;
         .side {
-            display: none;
+            // display: none;
+            order: 1;
         }
         .main {
             flex: 1;
