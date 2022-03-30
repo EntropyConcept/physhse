@@ -1,0 +1,39 @@
+@import "../../styles/vars.scss";
+
+.wrapper {
+    @include container-full;
+    @include content-center;
+    .flex {
+        z-index: 0;
+        @include content-center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        background: gray(1);
+        border-radius: 0.5rem;
+        outline: 1px solid gray(3);
+        padding: 0;
+        overflow: hidden;
+        max-width: 36rem;
+        .item {
+            transition: 0.3s;
+            flex: 1;
+            min-width: 12rem;
+            cursor: pointer;
+            @include content-center;
+            padding: 2rem;
+            flex-direction: column;
+            outline: 1px solid gray(3);
+            // border: 1px solid gray(3);
+            z-index: 2;
+            &:hover {
+                background: white;
+                z-index: 1;
+                color: blue();
+            }
+            .text {
+                font-size: 1.2rem;
+                font-weight: 300;
+            }
+        }
+    }
+}
