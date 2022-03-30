@@ -1,0 +1,13 @@
+@import "./vars.scss";
+
+.columns {
+    width: 100%;
+    @include content-center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    .side {
+        flex: 1;
+        margin: 0 0.5rem;
+    }
+}

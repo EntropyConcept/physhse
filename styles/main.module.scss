@@ -5,11 +5,14 @@
     grid-template-columns: 1fr 25rem;
     -ms-grid-columns: 1fr 25rem;
     gap: 1rem;
+    .divider {
+        display: none;
+    }
     .side {
-        display: flex;
-        justify-content: baseline;
-        align-items: center;
-        flex-direction: column;
+        // display: flex;
+        // justify-content: baseline;
+        // align-items: center;
+        // flex-direction: column;
         .panel {
             width: 100%;
             padding: 1rem;
@@ -51,12 +54,16 @@
         // align-items: center;
         flex-direction: column;
         justify-content: center;
+        gap: 0;
         .side {
             // display: none;
             order: 1;
         }
         .main {
             flex: 1;
+        }
+        .divider {
+            display: block;
         }
     }
 }

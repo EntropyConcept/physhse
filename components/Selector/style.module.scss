@@ -1,9 +1,10 @@
 @import "../../styles/vars.scss";
 
 .wrapper {
-    @include container-full;
+    // @include container-full;
     @include content-center;
     .flex {
+        margin: 0 0.5rem;
         z-index: 0;
         @include content-center;
         flex-direction: row;
@@ -17,7 +18,7 @@
         .item {
             transition: 0.3s;
             flex: 1;
-            min-width: 12rem;
+            min-width: 10.75rem;
             cursor: pointer;
             @include content-center;
             padding: 2rem;

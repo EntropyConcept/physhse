@@ -56,7 +56,7 @@ const Header : FunctionComponent<Props> = (props:Props) => {
                         <ChevronsLeft size="1.1rem"></ChevronsLeft>
                       </button></Link>
                       {dir.slice(2).map((a, index)=> {
-                      return <Link key={index} href={dir.slice(0, index - 1).join("/")} passHref><button className={classNames({[style.selected]: index == dir.length-3})}>{Proxy(a)}</button></Link>
+                      return <Link key={index} href={dir.slice(0, index).join("/")} passHref><button className={classNames({[style.selected]: index == dir.length-3})}>{Proxy(a)}</button></Link>
                     })}</div>
                   }
               </div>

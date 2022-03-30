@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Table from "../components/Table/table"
 import Columns from '../components/Columns/columns'
-import { Accordion } from '@mantine/core'
+import { Accordion, Divider } from '@mantine/core'
 import Panel from '../components/Panel/panel'
 
 const c2 : NextPage = ()=>{
@@ -23,7 +23,7 @@ const c2 : NextPage = ()=>{
             {name: "Питон"},
             {name: "Дифференциальные уравнения"},
         ]}/>
-        <hr />
+        <Divider my="sm" label="Дополнительно" labelPosition='center'></Divider>
         <Columns cols="20rem" content={[
             <Panel overflow='hidden' padding={0} key="1">
                 <Accordion multiple>

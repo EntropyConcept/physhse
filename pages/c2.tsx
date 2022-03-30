@@ -3,7 +3,7 @@ import React from 'react'
 import Table from "../components/Table/table"
 import Panel from "../components/Panel/panel"
 import Columns from "../components/Columns/columns"
-import {Accordion} from "@mantine/core"
+import {Accordion, Divider} from "@mantine/core"
 
 const c2 : NextPage = () => {
   return (
@@ -27,7 +27,7 @@ const c2 : NextPage = () => {
             {name: "Обработка данных эксперимента"},
             {name: "Право"},
         ]}/>
-        <hr />
+        <Divider my="sm" label="Дополнительно" labelPosition='center'></Divider>
         <Columns cols="20rem" content={[
             <Panel overflow='hidden' padding={0} key="1">
                 <Accordion multiple>
