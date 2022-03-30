@@ -1,4 +1,5 @@
-import type { NextPage } from 'next'
+import type { NextPage} from 'next'
+import Head from 'next/head'
 import TimelineCaf from '../components/Timeline/timelineCaf'
 import { AspectRatio, Accordion, Divider } from '@mantine/core'
 import style from "../styles/main.module.scss"
@@ -15,6 +16,9 @@ const accStyle = {
 const Home: NextPage = () => {
   return (
     <div className={style.wrapper}>
+      <Head>
+        <title>Главная</title>
+      </Head>
       <div className={style.main}>
         <TimelineCaf></TimelineCaf>
         <Divider my="sm" className={style.divider}></Divider>

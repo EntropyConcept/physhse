@@ -3,9 +3,13 @@ import Table from "../components/Table/table"
 import Columns from '../components/Columns/columns'
 import { Accordion, Divider } from '@mantine/core'
 import Panel from '../components/Panel/panel'
+import Head from "next/head"
 
 const c2 : NextPage = ()=>{
     return <>
+        <Head>
+            <title>Курс 1</title>
+        </Head>
         <Table top static data={[{name: "Первый семестр"}]}/>
         <Table data={[
             {name: "Математический анализ", link: "/c1/matan"},

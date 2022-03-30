@@ -4,10 +4,14 @@ import Table from "../components/Table/table"
 import Panel from "../components/Panel/panel"
 import Columns from "../components/Columns/columns"
 import {Accordion, Divider} from "@mantine/core"
+import Head from "next/head"
 
 const c2 : NextPage = () => {
   return (
     <>
+        <Head>
+            <title>Курс 2</title>
+        </Head>
       <Table top static data={[{name: "Первый семестр"}]}/>
         <Table data={[
             {name: "Вычислительная физика"},

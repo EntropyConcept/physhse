@@ -1,9 +1,13 @@
 import type { NextPage } from 'next'
 import React from 'react'
+import Head from "next/head"
 
 const c4 : NextPage = () => {
   return (
     <>
+      <Head>
+            <title>Курс 4</title>
+        </Head>
       Курс 4 <br />
       На этой странице будет функционал переключения между кафедрами, так что сделана она будет не скоро.
       <div style={{width: "100%", display: "flex", alignItems: "center", justifyContent:"center", height: "50vh"}}>
