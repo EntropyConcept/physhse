@@ -47,6 +47,7 @@ export default function LoginForm(props: Props) {
         }
         await auth.signInWithEmailAndPassword(email, password);
         window.localStorage.setItem("username", editor)
+        window.localStorage.setItem("role", role)
         } catch (error: any) {
         let code = error.code;
         switch (code){
