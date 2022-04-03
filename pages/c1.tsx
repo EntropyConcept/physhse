@@ -5,7 +5,9 @@ import { Accordion, Divider } from '@mantine/core'
 import Panel from '../components/Panel/panel'
 import Head from "next/head"
 
+
 const c2 : NextPage = ()=>{
+
     return <>
         <Head>
             <title>Курс 1</title>

@@ -42,8 +42,12 @@ $static: mix(gray(2), gray(1));
         .add {
             @include content-center;
             cursor: pointer;
-            color: transparent;
+            color: gray(5);
             user-select: none;
+            &:hover {
+                color: blue();
+            }
+            flex: 100%;
         }
         .link {
             color: mix(cyan(), blue(), 60%);

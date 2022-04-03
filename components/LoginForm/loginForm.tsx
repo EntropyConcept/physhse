@@ -48,7 +48,7 @@ export default function LoginForm(props: Props) {
         await auth.signInWithEmailAndPassword(email, password).then(() => {
           window.localStorage.setItem("username", editor);
           window.localStorage.setItem("role", role);
-          location.reload();
+          // location.reload();
           setMessage('');
         });
         } catch (error: any) {

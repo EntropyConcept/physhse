@@ -2,7 +2,9 @@ import { FunctionComponent, ReactNode } from "react";
 import style from "./style.module.scss"
 import Link from "next/link"
 import classNames from "classnames"
-import { LayoutGridAdd } from "tabler-icons-react"
+import { Plus, X } from "tabler-icons-react"
+import { UserContext } from '../../lib/context'
+import { useContext, useState } from 'react'
 
 interface entry{
     name : string,
@@ -19,16 +21,23 @@ type Props = {
 }
 
 const Table : FunctionComponent<Props> = (props: Props) => {
+    const [data, setData] = useState(props.data);
+    const {user, username, role} = useContext(UserContext);
     return <div className={style.wrapper}>
         <div className={classNames(style.table, {[style.top]: props.top, [style.bottom]: props.bottom, [style.static]: props.static, [style.nolines]: props.nolines})}>
-            {props.data.map((d)=>{
+            {data.map((d)=>{
                 if (d.link){
-                    return <Link key={d.name} passHref href={d.link?d.link:"#"}><div className={classNames(style.entry, style.link)}>{d.content?d.content:d.name}</div></Link>
+                    return <Link key={d.name} passHref href={d.link?d.link:"#"}>
+                        <div className={classNames(style.entry, style.link)}>
+                            {d.content?d.content:d.name}
+                        </div>
+                    </Link>
                 }
-                return <div key={d.name} className={classNames(style.entry, {[style.add]: d.name=="<add>"})}>{d.name=="<add>"?
-                <>{"f"}<LayoutGridAdd size="1.2rem" color="#1e80ff" strokeWidth={2}/>{"f"}</>:
-                (d.content?d.content:d.name)}</div>
+                return <div key={d.name} className={classNames(style.entry, {[style.add]: d.name=="<add>"})}>{(d.content?d.content:d.name)}</div>
             })}
+            {/* {(username && !props.static) && <div className={classNames(style.entry, style.add)} onClick={()=>{let copy=data.concat(); copy.push({name: "Новый раздел"}); setData(copy)}}>
+                <Plus size="1.2rem" strokeWidth={2} />
+            </div>} */}
         </div>
     </div>
 }
