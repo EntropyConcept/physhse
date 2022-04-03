@@ -39,6 +39,12 @@ $static: mix(gray(2), gray(1));
                 padding: 0.75rem 1rem;
             }
         }
+        .add {
+            @include content-center;
+            cursor: pointer;
+            color: transparent;
+            user-select: none;
+        }
         .link {
             color: mix(cyan(), blue(), 60%);
             cursor: pointer;

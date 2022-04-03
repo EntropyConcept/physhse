@@ -37,6 +37,19 @@
             border-top: 2px solid gray(3);
             margin: 1rem 0;
         }
+        .linkList {
+            margin: 0 -16px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            .link {
+                padding: 0.25rem 1rem;
+                background: gray(0, 0);
+                &:hover {
+                    background: blue(1, 0.5);
+                }
+            }
+        }
     }
 }
 

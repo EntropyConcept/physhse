@@ -98,7 +98,7 @@
                 display: flex;
                 align-items: flex-end;
             }
-            @media screen and (max-width: 420px) {
+            @media screen and (max-width: 404px) {
                 overflow-x: scroll;
                 overflow-y: hidden;
                 .buttons {
@@ -106,7 +106,7 @@
                 }
             }
             &::-webkit-scrollbar {
-                height: 0.4rem;
+                height: 0.5rem;
                 position: absolute;
                 background: none;
             }
@@ -115,13 +115,47 @@
             }
             &::-webkit-scrollbar-thumb {
                 border-radius: 1rem;
-                background: gray(9, 0.1);
-                body[dark] & {
-                    background: gray(1, 0.1);
-                }
+                background: gray(9, 0.15);
+                border: 2px solid gray(1);
             }
         }
         .right {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+    }
+}
+
+@media (max-width: 670px) {
+    .main {
+        .container {
+            flex-direction: column;
+            .left,
+            .right {
+                height: auto;
+                width: 100%;
+            }
+            .left {
+                .label {
+                    display: none;
+                }
+                align-items: center;
+                width: 100%;
+            }
+            .right {
+                order: -1;
+                justify-content: flex-start;
+            }
+        }
+    }
+}
+@media (max-width: 404px) {
+    .main {
+        .container {
+            .left {
+                align-items: flex-start;
+            }
         }
     }
 }

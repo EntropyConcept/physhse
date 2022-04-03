@@ -1,10 +1,12 @@
 import style from "./style.module.scss";
 import classNames from 'classnames';
-import {FunctionComponent} from "react"
+import {FunctionComponent, useContext} from "react"
 import {useRouter} from "next/router"
 import Link from "next/link"
 import {ChevronsLeft} from "tabler-icons-react"
-
+import {MediaQuery} from "@mantine/core"
+import Button from "../Button/button"
+import {UserContext} from "../../lib/context"
 
 type Props = {
     tab?: number | undefined | boolean,
@@ -31,15 +33,16 @@ const Proxy = (a:string) => {
 
 const Header : FunctionComponent<Props> = (props:Props) => {
     const router = useRouter();
-    let dir = router.pathname.split("/");
-
+    let id : any = router.query.id;
+    let dir = router.pathname.replace("[id]", id).split("/");
+    const {user, username, role} = useContext(UserContext);
 
     return (
       <div className={style.main}>
           <div className={style.container}>
               <div className={style.left}>
                   <div className={style.label}>
-                      <Link passHref href="/main"><img src="/hse3.svg" alt="hse-logo" className={style.logo}/></Link>
+                    <Link passHref href="/main"><img src="/hse3.svg" alt="hse-logo" className={style.logo}/></Link>
                   </div>
                   {dir.length < 3 && 
                     <div className={style.buttons}>
@@ -52,7 +55,7 @@ const Header : FunctionComponent<Props> = (props:Props) => {
                     </div>
                   }
                   {dir.length > 2 && <div className={style.buttons}>
-                      <Link href={dir.slice(0, 2).join("/")}><button title="f">
+                      <Link href={dir.slice(0, 2).join("/")}><button title="Назад">
                         <ChevronsLeft size="1.1rem"></ChevronsLeft>
                       </button></Link>
                       {dir.slice(2).map((a, index)=> {
@@ -61,6 +64,13 @@ const Header : FunctionComponent<Props> = (props:Props) => {
                   }
               </div>
               <div className={style.right}>
+                {username && <>
+                  <Link passHref href="/login"><Button>Выход</Button></Link>
+                </>}
+                {!username && <>
+                  {/* <Link passHref href="/reg"><Button white>Регистрация</Button></Link> */}
+                  <Link passHref href="/login"><Button>Вход</Button></Link>
+                </>}
               </div>
           </div>
       </div>

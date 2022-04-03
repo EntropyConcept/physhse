@@ -37,9 +37,9 @@ const Home: NextPage = () => {
               Факультет физики был создан в октябре 2016 г. с целью подготовки специалистов-исследователей по естественно-научному направлению НИУ ВШЭ. Первый набор в бакалавриат и магистратуру факультета состоялся в августе 2017 г.
             </Accordion.Item>
             <Accordion.Item label="Кафедры">
-              <ul>
-                {depart.map((d)=>{if (d.link) return <li key={d.name}><a href={d.link}>{d.subject}</a></li>})}
-              </ul>
+              <div className={style.linkList}>
+                {depart.map((d, index)=>{if (d.link) return <a href={d.link} key={index} className={style.link}>{d.subject}</a>})}
+              </div>
             </Accordion.Item>
           </Accordion>
         </Panel>

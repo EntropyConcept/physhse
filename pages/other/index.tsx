@@ -15,7 +15,10 @@ const index : NextPage = () => {
     <div>
       <Selector></Selector>
         <Divider my="sm"/>
+        <div style={{width: "100%", justifyContent: "center", alignItems: "center", display: "flex"}}>
+          Сервисы пока в разработке
         </div>
+    </div>
       {/* <div className={style.side}>
         <Panel>
         </Panel>

@@ -1,0 +1,71 @@
+@import "../../styles/vars.scss";
+.wrapper {
+    width: 100%;
+    @include content-center;
+    height: calc(100vh - 20rem);
+    .panel {
+        width: 100%;
+        max-width: 25rem;
+        .title {
+            width: 100%;
+            @include content-center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: gray(7);
+            padding: 0.5rem 0;
+        }
+        input {
+            @include appearance(none);
+            margin: 0.75rem 0;
+            transition: 0.3s;
+            width: 100%;
+            border-radius: 0.5rem;
+            border: 1px solid gray(3);
+            padding: 0.75rem 1rem;
+            outline: none;
+            background: transparent;
+            font-weight: 500;
+            font-size: 1rem;
+            color: gray(6);
+            &:focus {
+                color: blue();
+            }
+            &::placeholder {
+                transition: 0.3s;
+                font-weight: 400;
+                color: gray(4);
+            }
+            &:focus::placeholder {
+                color: mix(gray(4), blue(4));
+            }
+        }
+        input:first-of-type {
+            margin-top: 0.5rem;
+        }
+        input:last-of-type {
+            margin-bottom: 0.5rem;
+        }
+        input[type="submit"] {
+            background: blue();
+            color: white;
+            border: 1px solid blue();
+            font-weight: bold;
+            &:hover {
+                background: transparent;
+                color: blue();
+                box-shadow: glow(blue(), 1.5rem, 0.2);
+            }
+        }
+        .another {
+            // font-size: 0.8rem;
+            color: gray(5);
+            transition: 0.3s;
+            margin-top: -0.5rem;
+            @include content-center;
+            &:hover {
+                color: blue();
+                text-decoration: underline;
+            }
+        }
+    }
+}

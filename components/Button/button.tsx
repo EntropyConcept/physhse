@@ -12,7 +12,9 @@ type Props = {
   className ?: string,
   children ?: any,
   onClick ?: (...args : any[]) => any,
-  style ?: any
+  style ?: any,
+  ref ?: any,
+  href ?: string,
 }
 
 const Button:FunctionComponent<Props> = (props:Props) => {
@@ -23,7 +25,7 @@ const Button:FunctionComponent<Props> = (props:Props) => {
           [style.white]: props.white, 
           [style.blue]: props.blue, 
           [style.small]: props.small})
-      } style={props.style}>
+      } style={props.style} ref={props.ref}>
       {props.children}
     </div>
   )

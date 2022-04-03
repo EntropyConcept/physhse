@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+
+}
+
+datasource db {
+  provider = "postgres"
+  url      = "file:./dev.db"
+}
+
+model Term {
+  id        String   @id @default(cuid())
+  number    Int
+  lessons   String[]
+  programId String
+  program   Program  @relation(fields: [programId], references: [id])
+}
+
+model Program {
+  id           String     @id @default(cuid())
+  termsId      String[]
+  departmentId Int
+  terms        Term[]
+  department   Department @relation(fields: [departmentId], references: [id])
+}
+
+model Department {
+  id       Int       @id @default(autoincrement())
+  name     String
+  fullName String
+  subject  String
+  link     String
+  fields   String[]
+  programs Program[]
+}
