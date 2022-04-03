@@ -45,9 +45,12 @@ export default function LoginForm(props: Props) {
             setMessage("Введите имя редактора");
             return;
         }
-        await auth.signInWithEmailAndPassword(email, password);
-        window.localStorage.setItem("username", editor)
-        window.localStorage.setItem("role", role)
+        await auth.signInWithEmailAndPassword(email, password).then(() => {
+          window.localStorage.setItem("username", editor);
+          window.localStorage.setItem("role", role);
+          location.reload();
+          setMessage('');
+        });
         } catch (error: any) {
         let code = error.code;
         switch (code){
@@ -58,14 +61,18 @@ export default function LoginForm(props: Props) {
         }
         }
     }
-    const signOut = async () => {
-        await auth.signOut();
-        window.localStorage.removeItem("username");
+    const signOut = async (e: any) => {
+        e.preventDefault();
+        await auth.signOut().then(() => {
+          window.localStorage.removeItem("username");
+          window.localStorage.removeItem("role");
+          location.reload();
+        });
     }
 
     return <form className={style.wrapper} onSubmit={!username?signIn:signOut}>
     <Panel className={style.panel}>
-      <div className={style.title}>Вход</div>
+      <div className={style.title}>{!username?"Вход":"Выход"}</div>
       <Text color="red" align='center'>{message}</Text>
       <Divider my="sm"></Divider>
       {!username && <>
@@ -77,6 +84,7 @@ export default function LoginForm(props: Props) {
       </>}
       {username && <>
         <Text align='center'>Вы вошли как <b>{username}</b></Text>
+        <Divider my="sm"></Divider>
         <input type="submit" value="Выход"/>
       </>}
       {/* <Link passHref href="/reg"><div className={style.another}>Перейти к регистрации</div></Link> */}
