@@ -1,13 +1,28 @@
 import type { NextPage } from 'next'
+import { GetServerSideProps } from 'next'
 import Table from "../components/Table/table"
 import Columns from '../components/Columns/columns'
 import { Accordion, Divider } from '@mantine/core'
 import Panel from '../components/Panel/panel'
 import Head from "next/head"
+import {firestore} from "../lib/firebase"
 
+export async function getServerSideProps() {
+    // const query = await firestore.collection("courses").get();
+    // const data = query.docs.map(doc => doc.data());
+    const data = {}
+    return {
+      props: {
+          data: data
+      }, 
+    }
+  }
 
-const c2 : NextPage = ()=>{
+export type Props= {
+    data: any
+}
 
+const c2 : NextPage<Props> = ({data})=>{
     return <>
         <Head>
             <title>Курс 1</title>

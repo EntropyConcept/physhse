@@ -2,6 +2,7 @@ import React, {ReactNode} from 'react'
 import style from "./style.module.scss"
 import Link from 'next/link'
 import { GitBranch, School, Affiliate, GitFork, FileCertificate, Atom2, LayersLinked, MailForward, LayoutGrid } from 'tabler-icons-react'
+import classNames from 'classnames'
 
 export interface Props{
 }
@@ -10,42 +11,50 @@ const buttons = [
     {
         name: "Рейтинг",
         link: "other",
-        icon: School
+        icon: School,
+        locked: true
     },
     {
         name: "Преподаватели",
         link: "other",
-        icon: Affiliate
-    },
-    {
-        name: "Справки",
-        link: "other",
-        icon: FileCertificate
+        icon: Affiliate,
+        locked: true
     },
     {
         name: "Майноры",
         link: "other",
-        icon: Atom2
+        icon: Atom2,
+        locked: true
     },
     {
         name: "Кафедры",
         link: "other",
-        icon: GitFork
+        icon: GitFork,
+        locked: true
     },
     {
         name: "Коворкинг",
         link: "other",
-        icon: LayersLinked
+        icon: LayersLinked,
+        locked: true
     },
     {
         name: "Лекторий",
         link: "other",
-        icon: LayoutGrid
+        icon: LayoutGrid,
+        locked: true
+    },
+    {
+        name: "Справки",
+        link: "other/inquiry",
+        icon: FileCertificate,
+        locked: false
     },
     {
         name: "Разработка",
         link: "other/dev",
-        icon: GitBranch
+        icon: GitBranch,
+        locked: false
     },
 ]
 
@@ -54,7 +63,7 @@ const Selector = (props: Props) => {
         <div className={style.flex}>
             {buttons.map((b, index) => {
                 return <Link passHref href={b.link} key={index}>
-                    <div className={style.item}><b.icon size="2rem" strokeWidth={1}/><div className={style.text}>{b.name}</div></div>
+                    <div className={classNames(style.item, {[style.locked]: b.locked})}><b.icon size="2rem" strokeWidth={1}/><div className={classNames(style.text)}>{b.name}</div></div>
                 </Link>
             })}
         </div>

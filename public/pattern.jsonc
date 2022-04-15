@@ -1,0 +1,48 @@
+[
+    { // >----|Pattern|----<
+        "name":     "",     // name of the discipline
+        "half":     1,      // first or second half of the year 
+        "year":     1,      // number of year to begin with
+        "depart":   "*",    // department of subject (* if for all departments) 
+        "token":    "test", // short name that will be used in URL of the discipline
+        "deleted":  true,   // all the disciplines can't be removed permanently. They disappear while being marked as deleted.
+        "info": { 
+            "formula":      "",     // formula for the mark
+            "description":  "", 
+            "exam":         "",     // date of exam 
+            "exam-show":    true,   // is exam shown
+            "colloq":       0,      // number of colloquiums 
+            "colloq-show":  true,   // are colloquiums shown
+            "control":      0,      // number of tests 
+            "control-show": true,   // are tests shown
+            "works":        0,      // number of works 
+            "works-show":   true,   // are works shown
+            "hours":        0,      // hours of study
+            "lector":       "",     // name of the main lecturer
+            "teachers": [  // names of the seminarists and other teachers
+                ""
+            ],
+            "customs": [ // custom fields
+                { // >----|Pattern|----<
+                    "name":     "", // name of the field that will be displayed
+                    "value":    ""  // data in the field to be shown
+                } // >-----------------<
+            ],
+            "topics": [ // names of the topics on the course
+                ""
+            ]
+        },
+        "sections": [ // data sections
+            { // >----|Pattern|----<
+                "name": "", // name of the section
+                "data": ""  // markdown data within the section
+            } // >-----------------<
+        ],
+        "blocks": [ // accordion blocks
+            { // >----|Pattern|----<
+                "title":    "", // title of the block
+                "text":     ""  // title of the block
+            } // >-----------------<
+        ]
+    } // >-----------------<
+]

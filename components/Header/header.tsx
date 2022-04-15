@@ -25,6 +25,7 @@ const Proxy = (a:string) => {
     case "c4": return "Курс 4";
     case "main": return "Главная";
     case "dev": return "Разработка";
+    case "inquiry": return "Справки";
     case "matan": return "Математический анализ";
     case "": return "";
     default: return a;
