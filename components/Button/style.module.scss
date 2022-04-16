@@ -60,6 +60,13 @@
         box-shadow: glow(blue(1), 15px, 0.2);
     }
 }
+.main.disabled {
+    cursor: default;
+    box-shadow: shadow(3, 0.05, 0);
+    background: gray(1);
+    color: gray();
+    border: 1px solid gray(3);
+}
 body.dark {
     .main {
         box-shadow: shadow(5, 0.2, 0);

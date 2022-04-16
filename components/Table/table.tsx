@@ -5,9 +5,11 @@ import classNames from "classnames"
 import { Plus, X } from "tabler-icons-react"
 import { UserContext } from '../../lib/context'
 import { useContext, useState } from 'react'
-import {Modal, Divider, Text, Input, Space, Tooltip, NumberInput, Grid, Progress, SegmentedControl} from '@mantine/core'
+import {Modal, Divider, Text, TextInput, Space, Tooltip, NumberInput, Grid, Progress, SegmentedControl} from '@mantine/core'
 import { At, Forms, InfoCircle } from 'tabler-icons-react'
 import Button from "../Button/button"
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { GripVertical } from 'tabler-icons-react';
 
 interface entry{
     name : string,
@@ -30,6 +32,8 @@ const Table : FunctionComponent<Props> = (props: Props) => {
     const {user, username, role} = useContext(UserContext);
     const [modal, setModal] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [name, setName] = useState<string>();
+    const [token, setToken] = useState<string>();
     const [year, setYear] = useState(props.year || undefined);
     const [half, setHalf] = useState(props.half || undefined);
     const addNew = () => {
@@ -38,6 +42,11 @@ const Table : FunctionComponent<Props> = (props: Props) => {
     //    setData(copy)
         setModal(true);
         setProgress(33);
+    }
+    const tokenInput = (val) => {
+        let s = val.toLowerCase();
+        s = s.replace(" ", "")
+        setToken(s);
     }
     
     const tip = (text: string) => (
@@ -75,11 +84,11 @@ const Table : FunctionComponent<Props> = (props: Props) => {
             <Progress value={progress}></Progress>
             {progress == 33 && <>
                 <Space h="md"/>
-                <Input placeholder="Название" icon={<Forms strokeWidth={1.5}/>}></Input>
+                <TextInput placeholder="Название" icon={<Forms strokeWidth={1.5}/>} value={name} onChange={(event)=>setName(event.currentTarget.value)}></TextInput>
                 <Space h="md"/>
-                <Input placeholder="Токен"  icon={<At strokeWidth={1.5}/>} rightSection={
+                <TextInput placeholder="Токен"  icon={<At strokeWidth={1.5}/>} rightSection={
                     tip("Данный токен будет использоваться для URL курса и должен быть уникален.")}
-                ></Input>
+                    value = {token} onChange={(event)=>tokenInput(event.currentTarget.value)}></TextInput>
                 <Space h="xs"/>
                 <Grid gutter={0} grow>
                     <Grid.Col style={{padding: ".25rem"}} span={1}>
