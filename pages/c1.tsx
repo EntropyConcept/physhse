@@ -34,7 +34,7 @@ const c2 : NextPage<Props> = ({data})=>{
             {name: "Линейная алгебра"},
             {name: "Механика"},
             {name: "История"},
-        ]}/>
+        ]} year={1} half={1}/>
         <Table static data={[{name: "Второй семестр"}]}/>
         <Table bottom data={[
             {name: "Математический анализ"},
@@ -43,7 +43,7 @@ const c2 : NextPage<Props> = ({data})=>{
             {name: "Аналитическая механика"},
             {name: "Питон"},
             {name: "Дифференциальные уравнения"},
-        ]}/>
+        ]} year={1} half={2}/>
         <Divider my="sm" label="Дополнительно" labelPosition='center'></Divider>
         <Columns cols="20rem" content={[
             <Panel overflow='hidden' padding={0} key="1">

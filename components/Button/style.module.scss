@@ -39,6 +39,15 @@
         box-shadow: glow(blue(1), 15px, 0.2);
     }
 }
+.main.red {
+    background: red();
+    border-color: red();
+    &:hover {
+        background: #0000;
+        color: red();
+        box-shadow: glow(red(), 15px, 0.2);
+    }
+}
 .main.white {
     box-shadow: shadow(3, 0.05, 0);
     background: gray(0);

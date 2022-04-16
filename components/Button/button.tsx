@@ -7,6 +7,7 @@ type Props = {
   black ?: boolean,
   blue ?: boolean,
   white ?: boolean,
+  red ?: boolean,
   small ?: boolean,
   width ?: string | number,
   className ?: string,
@@ -24,6 +25,7 @@ const Button:FunctionComponent<Props> = (props:Props) => {
           [style.black]: props.black, 
           [style.white]: props.white, 
           [style.blue]: props.blue, 
+          [style.red]: props.red, 
           [style.small]: props.small})
       } style={props.style} ref={props.ref}>
       {props.children}
