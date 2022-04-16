@@ -5,10 +5,12 @@ import { Eye, EyeOff } from 'tabler-icons-react'
 
 export type Props = {
     children: ReactNode,
+    show : boolean | null,
+    setShow : (show : boolean | null) => void
 }
 
 const DEField = (props:Props) => {
-  const [disabled, setDisabled] = useState<boolean>(false)
+  const [disabled, setDisabled] = [props.show, props.setShow];
   const passDisable = React.Children.map(props.children, child=>{
     if (React.isValidElement(child)) {
       return React.cloneElement(child, { disabled: disabled });

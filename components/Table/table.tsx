@@ -8,20 +8,21 @@ import { useContext, useState } from 'react'
 import {Modal, Divider, Text, TextInput, Space, Tooltip, Textarea, Grid, Progress, SegmentedControl, ActionIcon, Select, MultiSelect, NumberInput, Group, Box} from '@mantine/core'
 import { At, Forms, InfoCircle } from 'tabler-icons-react'
 import Button from "../Button/button"
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { ChevronsUp, Pencil, Trash} from 'tabler-icons-react';
 import Teachers from '../../public/teachers.json';
-import index from "../../pages/other";
 import DEField from "../DEField/DEField";
 import { DatePicker } from '@mantine/dates';
 import 'dayjs/locale/ru';
 import {Button as MButton} from '@mantine/core';
 import { useForm, formList } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
+import { firestore, Timestamp } from '../../lib/firebase';
+import { doc, setDoc } from "firebase/firestore"
 
 interface entry{
-    name : string,
+    name : string | null,
     content ?: ReactNode,
-    link ?: string
+    link ?: string | null
 }
 
 type Props = {
@@ -41,25 +42,59 @@ const Table : FunctionComponent<Props> = (props: Props) => {
     const [progress, setProgress] = useState(0);
     const [name, setName] = useState<string>();
     const [token, setToken] = useState<string>();
+    const [tokenError, setTokenError] = useState<string|null>();
     const [depart, setDepart] = useState<string|null>("0");
     const [editYear, setEditYear] = useState<boolean>(false);
     const [year, setYear] = useState(props.year || undefined);
     const [half, setHalf] = useState(props.half || undefined);
     const [teachers, setTeachers] = useState(Teachers);
     const [lecturer, setLecturer] = useState<string|null>();
+    const [examDate, setExamDate] = useState<Date|null>(new Date());
+    const [examShow, setExamShow] = useState<boolean|null>(true);
     const [selectedTeachers, setSelectedTeachers] = useState<string[]>([]);
+    const [description, setDescription] = useState<string | number | readonly string[] | undefined>("");
+    const [colocNumber, setColocNumber] = useState<number | undefined>();
+    const [colocShow, setColocShow] = useState<boolean|null>(true);
+    const [controlNumber, setControlNumber] = useState<number | undefined>();
+    const [controlShow, setControlShow] = useState<boolean|null>(true);
+    const [workNumber, setWorkNumber] = useState<number | undefined>();
+    const [workShow, setWorkShow] = useState<boolean|null>(true);
+    const [hours, setHours] = useState<number | undefined>();
+    const [formula, setFormula] = useState<string | number | readonly string[] | undefined>();
+    const [formulaShow, setFormulaShow] = useState<boolean|null>(true);
+    const [finalError, setFinalError] = useState<string|null>();
     const addNew = () => {
         setModal(true);
+        setFinalError(null);
         setProgress(33);
     }
     const tokenInput = (val:string|undefined) => {
+        let Token = token;
         if (val !== undefined){
             let s = val.toLowerCase();
             s = s.replace(" ", "-")
             let reg = /^[a-z0-9][a-z0-9\-]*[a-z0-9]*$/;
             if (reg.test(s) || !s){
                 setToken(s);
+                Token = s;
             }
+        }
+        if (Token){
+            let docRef = firestore.collection("courses").doc(Token);
+            
+            docRef.get().then(function(doc) {
+                if (doc.exists) {
+                    setTokenError("Такой токен уже существует");
+                } else {
+                    setTokenError(null);
+                }
+            }
+            ).catch(function(error) {
+                setTokenError("Ошибка при обработке токена");
+            });
+        }
+        else{
+            setTokenError(null);
         }
     }
     
@@ -83,13 +118,11 @@ const Table : FunctionComponent<Props> = (props: Props) => {
         },
       });
     const fields = customFields.values.custom.map((_, index) => (
-        <Draggable key={index}   index={index} draggableId={index.toString()} >
-          {(provided) => (
-            <Group ref={provided.innerRef} mb="sm" {...provided.draggableProps}>
+            <Group mb="sm" key={index}>
               <div style={{display: "flex", flexDirection: "column", gap: ".5rem"}}>
                 <ActionIcon variant="light" color="blue" onClick={()=>{
                     customFields.reorderListItem("custom", {from: index, to: index-1});
-                }} disabled={index==0}><ChevronsUp size={18}/></ActionIcon>
+                }} disabled={index==0}><ChevronsUp size={18} /></ActionIcon>
                 <ActionIcon variant="light" color="red" onClick={()=>{
                     customFields.removeListItem("custom", index);	
                 }}><Trash size={18}/></ActionIcon>
@@ -109,11 +142,73 @@ const Table : FunctionComponent<Props> = (props: Props) => {
                 />
               </div>
             </Group>
-          )}
-        </Draggable>
       ));
 
     const upperName = name?.charAt(0).toUpperCase() + (name?name.slice(1):"");
+    const reset = () => {
+        setDepart("0");
+        setYear(props.year);
+        setHalf(props.half);
+        setLecturer(null);
+        setExamDate(new Date());
+        setSelectedTeachers([]);
+        setDescription("");
+        setColocNumber(undefined);
+        setControlNumber(undefined);
+        setWorkNumber(undefined);
+        setHours(undefined);
+        setFormula("");
+        setFinalError(null);
+        setProgress(100);
+        customFields.reset();
+    }
+    const createDiscipline = async () => {
+        if (name && token){
+            const course = {
+                name: name,
+                token: token,
+                year: year,
+                half: half,
+                deleted: false,
+                created: Timestamp.fromDate(new Date()),
+                createdBy: username,
+                editedBy: username,
+                depart: depart
+            }
+            const courseData = {
+                coloc: colocNumber?colocNumber:0,
+                control: controlNumber?controlNumber:0,
+                work: workNumber?workNumber:0,
+                formula: formula?formula:"",
+                description: description?description:"",
+                lecturer: lecturer?teachers[parseInt(lecturer)]:null,
+                examDate: Timestamp.fromDate(examDate?examDate:new Date()),
+                teachers: selectedTeachers.map((id:string)=>teachers[parseInt(id) - 1]),
+                custom: customFields.values.custom,
+                colocShow: colocShow,
+                controlShow: controlShow,
+                workShow: workShow,
+                formulaShow: formulaShow,
+                hours: hours?hours:0
+            }
+            await setDoc(doc(firestore, 'courses', token), course, {merge: true}).then(()=>{
+                setDoc(doc(firestore, `courses/${token}/data`, "info"), courseData, {merge: true}).then(()=>{
+                    reset();
+                })
+            }).catch(err => {
+                setFinalError("при создании курса произошла ошибка");
+                const report = {
+                    error: err.toString(),
+                    course: JSON.stringify(course),
+                    courseData: JSON.stringify(courseData),
+                    created: Timestamp.fromDate(new Date()),
+                    createdBy: username,
+                }
+                setDoc(doc(firestore, 'reports', (new Date()).toString()), report, {merge: true}).catch(err=>{});
+                setProgress(100);
+            });
+        }
+    }
 
     return <div className={style.wrapper}>
         <div className={classNames(style.table, {[style.top]: props.top, [style.bottom]: props.bottom, [style.static]: props.static, [style.nolines]: props.nolines})}>
@@ -127,6 +222,7 @@ const Table : FunctionComponent<Props> = (props: Props) => {
                 }
                 return <div key={d.name} className={classNames(style.entry, {[style.add]: d.name=="<add>"})}>{(d.content?d.content:d.name)}</div>
             })}
+            {!data.length && <div className={style.entry}><Text color="red">Нет данных</Text></div>}
             {(username && !props.static) && <div className={classNames(style.entry, style.add)} onClick={addNew}>
                 <Plus size="1.2rem" strokeWidth={2} />
             </div>}
@@ -148,9 +244,9 @@ const Table : FunctionComponent<Props> = (props: Props) => {
                 <Space h="md"/>
                 <TextInput label="URL Токен" required placeholder="Токен"  icon={<At strokeWidth={1.5}/>} rightSection={
                     tip("Данный токен будет использоваться для URL курса и должен быть уникален.")}
-                    value = {token} onChange={(event)=>tokenInput(event.currentTarget.value)}></TextInput>
+                    value = {token} onChange={(event)=>tokenInput(event.currentTarget.value)} error={tokenError}></TextInput>
                 <Space h="md"/>
-                <Textarea label="Описание" placeholder="Краткое описание дисциплины" autosize minRows={2} maxRows={5}></Textarea>
+                <Textarea label="Описание" placeholder="Краткое описание дисциплины" autosize minRows={2} maxRows={5} value={description} onChange={(e)=>setDescription(e.currentTarget.value)}></Textarea>
                 <Space h="xs"/>
                 <Grid gutter={0} grow>
                     <Grid.Col style={{padding: ".25rem"}} span={5}>
@@ -198,7 +294,7 @@ const Table : FunctionComponent<Props> = (props: Props) => {
                 <Space h="xs"/>
                 <Grid gutter={0} grow>
                     <Grid.Col span={1}>
-                        <Button style={{marginBottom: 0}} onClick={()=>setProgress(66)} disabled={!(name && token)}>
+                        <Button style={{marginBottom: 0}} onClick={()=>setProgress(66)} disabled={!(name && token) || (tokenError != null)}>
                             Далее
                         </Button>
                     </Grid.Col>
@@ -242,40 +338,32 @@ const Table : FunctionComponent<Props> = (props: Props) => {
                 <Space h="md"/>
                 <Divider label="Основная информация" labelPosition="center"/>
                 <Space h="md"/>
-                <DEField>
+                <DEField show={examShow} setShow={setExamShow}>
                     <DatePicker
                         locale="ru"
                         placeholder="Выберите дату"
                         label="Дата экзамена"
-                        defaultValue={new Date()}
+                        value={examDate}
+                        onChange={setExamDate}
                     />
                 </DEField>
                 <Space h="md"/>
-                <DEField><NumberInput min={0} label="Коллоквиумы" placeholder="Количество коллоквиумов"></NumberInput></DEField>
+                <DEField show={colocShow} setShow={setColocShow}><NumberInput min={0} label="Коллоквиумы" placeholder="Количество коллоквиумов" value={colocNumber} onChange={setColocNumber}></NumberInput></DEField>
                 <Space h="xs"/>
-                <DEField><NumberInput min={0} label="Контрольные" placeholder="Количество контрольных"></NumberInput></DEField>
+                <DEField show={controlShow} setShow={setControlShow}><NumberInput min={0} label="Контрольные" placeholder="Количество контрольных" value={controlNumber} onChange={setControlNumber}></NumberInput></DEField>
                 <Space h="xs"/>
-                <DEField><NumberInput min={0} label="Работы" placeholder="Количество работ"></NumberInput></DEField>
+                <DEField show={workShow} setShow={setWorkShow}><NumberInput min={0} label="Работы" placeholder="Количество работ" value={workNumber} onChange={setWorkNumber}></NumberInput></DEField>
                 <Space h="md"/>
-                <DEField><TextInput label="Формула оценки" min={0} placeholder="Формула"></TextInput></DEField>
+                <DEField show={formulaShow} setShow={setFormulaShow}><TextInput label="Формула оценки" min={0} placeholder="Формула" value={formula} onChange={(e)=>setFormula(e.currentTarget.value)}></TextInput></DEField>
+                <Space h="md"/>
+                <NumberInput label="Количество часов" min={0} placeholder="Часы" value={hours} onChange={setHours}></NumberInput>
                 <Space h="md"/>
                 <Divider label="Дополнительная информация"/>
                 <Space h="md"/>
                 <Box sx={{ maxWidth: 500 }} mx="auto">
-                <DragDropContext
-                    onDragEnd={({ destination, source }) =>
-                        destination?customFields.reorderListItem('custom', { from: source.index, to: destination.index }):null
-                    }
-                >
-                    <Droppable droppableId="dnd-list" direction="vertical">
-                    {(provided) => (
-                        <div {...provided.droppableProps} ref={provided.innerRef}>
-                        {fields}
-                        {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-                </DragDropContext>
+                <div>
+                {fields}
+                </div>
                 </Box>
                 <MButton style={{width: "100%", borderColor: "#ccc"}} variant="light" color="gray" onClick={() => customFields.addListItem('custom', { title: '', data: '' })}>+</MButton>
                 <Space h="xs"/>
@@ -286,7 +374,7 @@ const Table : FunctionComponent<Props> = (props: Props) => {
                         </Button>
                     </Grid.Col>
                     <Grid.Col span={1}>
-                        <Button style={{marginBottom: 0}} onClick={()=>setProgress(100)}>
+                        <Button style={{marginBottom: 0}} onClick={createDiscipline}>
                             Далее
                         </Button>
                     </Grid.Col>
@@ -296,7 +384,8 @@ const Table : FunctionComponent<Props> = (props: Props) => {
             {progress==100 && <>
                 <Space h="lg"/>
                 <Text align="center" weight={600}>{upperName} / <span style={{color:"#08f"}}>@{token}</span></Text>
-                <Text align="center">прикреплёно для программы {half}-го полугодия {year} курса </Text>
+                {finalError && <Text align="center" color="red" weight={600}>{finalError}</Text>}
+                {!finalError && <Text align="center">прикреплёно для программы {half}-го полугодия {year} курса </Text>}
                 <Space h="xs"/>
                 <Grid gutter={0} grow>
                     <Grid.Col span={1}>
@@ -305,7 +394,10 @@ const Table : FunctionComponent<Props> = (props: Props) => {
                         </Button>
                     </Grid.Col>
                     <Grid.Col span={1}>
-                        <Button style={{marginBottom: 0}} onClick={()=>setModal(false)}>
+                        <Button style={{marginBottom: 0}} onClick={()=>{setModal(false); showNotification({
+                            title: 'Курс ' + year?.toString(),
+                            message: <>Добавлена дисциплина <Text weight={600}>{name}</Text></>,
+                        })}}>
                             Редактировать
                         </Button>
                     </Grid.Col>
