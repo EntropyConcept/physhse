@@ -43,9 +43,12 @@ const Table : FunctionComponent<Props> = (props: Props) => {
         setModal(true);
         setProgress(33);
     }
-    const tokenInput = (val) => {
-        let s = val.toLowerCase();
-        s = s.replace(" ", "")
+    const tokenInput = (val:string|undefined) => {
+        let s = "";
+        if (val){
+            s = val.toLowerCase();
+            s = s.replace(" ", "")
+        }
         setToken(s);
     }
     
