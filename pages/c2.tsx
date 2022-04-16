@@ -21,7 +21,7 @@ const c2 : NextPage = () => {
             {name: "ТФКП"},
             {name: "Термодинамика"},
             {name: "Тензоры"},
-        ]}/>
+        ]} year={2} half={1}/>
         <Table static data={[{name: "Второй семестр"}]}/>
         <Table bottom data={[
             {name: "Химия для физиков"},
@@ -30,7 +30,7 @@ const c2 : NextPage = () => {
             {name: "Оптика"},
             {name: "Обработка данных эксперимента"},
             {name: "Право"},
-        ]}/>
+        ]} year={2} half={2}/>
         <Divider my="sm" label="Дополнительно" labelPosition='center'></Divider>
         <Columns cols="20rem" content={[
             <Panel overflow='hidden' padding={0} key="1">

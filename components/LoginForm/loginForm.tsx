@@ -16,7 +16,7 @@ export default function LoginForm(props: Props) {
     const {user, username, role} = useContext(UserContext);
     const [message, setMessage] = useState("");
     const [success, setSuccess] = useState("");
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState("editor@hse.ru");
     const [editor, setEditor] = useState("")
     const [password, setPassword] = useState("")
     // password = "Hse_4669201609" :) 
@@ -77,7 +77,7 @@ export default function LoginForm(props: Props) {
       <Divider my="sm"></Divider>
       {!username && <>
         <input type="text" placeholder='Имя редактора' onChange={(e)=>{setEditor(e.target.value)}} value={editor}/>
-        <input type="text" placeholder='Почта @hse' onChange={(e)=>{handleEmail(e.target.value)}} value={email}/>
+        {/* <input type="text" placeholder='Почта @hse' onChange={(e)=>{handleEmail(e.target.value)}} value={email}/> */}
         <input type="password" placeholder='Пароль' onChange={(e)=>{setPassword(e.target.value)}} value={password}/>
         <Divider my="sm"></Divider>
         <input type="submit" value="Вход"/>
