@@ -5,6 +5,9 @@ import { getDoc, doc } from "firebase/firestore";
 import dayjs from "dayjs";
 import 'dayjs/locale/ru';
 import { Text } from "@mantine/core";
+import { useEffect, useContext } from "react";
+import { PathContext } from "../../lib/context";
+
 
 export async function getServerSideProps(context : any) {
     let main = {} as any;
@@ -53,6 +56,13 @@ type Props = {
 
 
 const Page : NextPage<Props> = ({main, data, error}) =>{
+    const [, setPath]  = useContext(PathContext);
+    useEffect(() => {
+        setPath(main.name);
+        return () => {
+            setPath("");
+        }
+    } , [])
     return <>
         {error && <h5>{error}</h5>}
         {!error && <>

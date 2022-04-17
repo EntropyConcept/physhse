@@ -1,12 +1,12 @@
 import style from "./style.module.scss";
 import classNames from 'classnames';
-import {FunctionComponent, useContext} from "react"
+import {FunctionComponent, useContext, useEffect} from "react"
 import {useRouter} from "next/router"
 import Link from "next/link"
 import {ChevronsLeft} from "tabler-icons-react"
 import {MediaQuery} from "@mantine/core"
 import Button from "../Button/button"
-import {UserContext} from "../../lib/context"
+import {PathContext, UserContext} from "../../lib/context"
 
 type Props = {
     tab?: number | undefined | boolean,
@@ -16,28 +16,28 @@ const main = [
   "main", "c1", "c2", "c3", "c4", 'other'
 ]
 
-const Proxy = (a:string) => {
-  switch (a){
-    case "other": return "Другое";
-    case "c1": return "Курс 1";
-    case "c2": return "Курс 2";
-    case "c3": return "Курс 3";
-    case "c4": return "Курс 4";
-    case "main": return "Главная";
-    case "dev": return "Разработка";
-    case "inquiry": return "Справки";
-    case "matan": return "Математический анализ";
-    case "": return "";
-    default: return a;
-  }
-}
 
 const Header : FunctionComponent<Props> = (props:Props) => {
     const router = useRouter();
     let id : any = router.query.id;
-    let dir = router.pathname.replace("[id]", id).split("/");
+    let dir = router.pathname.split("/");
     const {user, username, role} = useContext(UserContext);
-
+    const [subpath,] = useContext(PathContext);
+  
+    const Proxy = (a:string, index: number, subpath: string | null) => {
+      switch (a){
+        case "other": return "Другое";
+        case "c1": return "Курс 1";
+        case "c2": return "Курс 2";
+        case "c3": return "Курс 3";
+        case "c4": return "Курс 4";
+        case "main": return "Главная";
+        case "dev": return "Разработка";
+        case "inquiry": return "Справки";
+        case "": return "";
+        default: return (subpath && index==0)?subpath:a;
+      }
+    }
     return (
       <div className={style.main}>
           <div className={style.container}>
@@ -60,7 +60,7 @@ const Header : FunctionComponent<Props> = (props:Props) => {
                         <ChevronsLeft size="1.1rem"></ChevronsLeft>
                       </button></Link>
                       {dir.slice(2).map((a, index)=> {
-                      return <Link key={index} href={dir.slice(0, index).join("/")} passHref><button className={classNames({[style.selected]: index == dir.length-3})}>{Proxy(a)}</button></Link>
+                      return <Link key={index} href={{pathname: dir.slice(0, index).join("/"), query: id?{ id: id }:undefined}} passHref><button className={classNames({[style.selected]: index == dir.length-3})}>{Proxy(a, index, subpath)}</button></Link>
                     })}</div>
                   }
               </div>
