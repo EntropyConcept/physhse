@@ -32,6 +32,7 @@ const Header : FunctionComponent<Props> = (props:Props) => {
         case "c3": return "Курс 3";
         case "c4": return "Курс 4";
         case "main": return "Главная";
+        case "admin": return "Управление";
         case "dev": return "Разработка";
         case "inquiry": return "Справки";
         case "": return "";
