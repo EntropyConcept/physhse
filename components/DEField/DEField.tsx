@@ -10,7 +10,7 @@ export type Props = {
 }
 
 const DEField = (props:Props) => {
-  const [disabled, setDisabled] = [props.show, props.setShow];
+  const [disabled, setDisabled] = [!props.show, props.setShow];
   const passDisable = React.Children.map(props.children, child=>{
     if (React.isValidElement(child)) {
       return React.cloneElement(child, { disabled: disabled });
@@ -21,7 +21,7 @@ const DEField = (props:Props) => {
       <div className={style.main}>
         {passDisable}
       </div>
-      <ActionIcon variant="outline" onClick={()=>setDisabled(!disabled)} size={36} style={{
+      <ActionIcon variant="outline" onClick={()=>setDisabled(disabled)} size={36} style={{
         borderColor: "#ccc"
       }} className={style.icon}>{disabled?<EyeOff size={18}/>:<Eye size={18}/>}</ActionIcon>
     </div>

@@ -181,7 +181,7 @@ const Table : FunctionComponent<Props> = (props: Props) => {
                 work: workNumber?workNumber:0,
                 formula: formula?formula:"",
                 description: description?description:"",
-                lecturer: lecturer?teachers[parseInt(lecturer)]:null,
+                lecturer: lecturer?teachers[parseInt(lecturer) - 1]:null,
                 examDate: Timestamp.fromDate(examDate?examDate:new Date()),
                 teachers: selectedTeachers.map((id:string)=>teachers[parseInt(id) - 1]),
                 custom: customFields.values.custom,
