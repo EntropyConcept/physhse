@@ -1,12 +1,15 @@
 import { NextPage } from "next";
 import Link from "next/link";
+import { useContext } from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import style from "./style.module.scss";
 import Panel from "../Panel/panel";
-import { Divider, Text } from "@mantine/core";
+import { Divider, Text, Tabs, Button } from "@mantine/core";
 import Entry from "./Entry";
 import depart from "../../public/departments.json";
+import { FileSpreadsheet, News, ListDetails, Edit } from "tabler-icons-react";
+import { UserContext } from "../../lib/context";
 
 export type Props = {
     main: any;
@@ -15,10 +18,55 @@ export type Props = {
 };
 
 const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
+    const { user, username, role } = useContext(UserContext);
     console.log(data);
     return (
         <div className={style.wrapper}>
-            <div className={style.main}></div>
+            <div className={style.main}>
+                {user && (
+                    <>
+                        <Panel
+                            style={{ marginBottom: 16 }}
+                            className={style.forEditor}
+                        >
+                            <span>
+                                Вы просматриваете данную страницу как студент
+                            </span>
+                            <Button
+                                variant="outline"
+                                leftIcon={<Edit size={16} />}
+                            >
+                                Перейти к редактированию
+                            </Button>
+                        </Panel>
+                    </>
+                )}
+                <Panel padding={"0 0 1rem 0"}>
+                    <Tabs>
+                        <Tabs.Tab
+                            label="Статья"
+                            icon={<News size={18} strokeWidth={1} />}
+                        >
+                            <Text color="gray" style={{ margin: "0 1rem" }}>
+                                Все расходимся, данные по предмету пока не
+                                добавили
+                            </Text>
+                        </Tabs.Tab>
+                        <Tabs.Tab
+                            label="Прикреплённые файлы"
+                            icon={<FileSpreadsheet size={18} strokeWidth={1} />}
+                        ></Tabs.Tab>
+                        <Tabs.Tab
+                            label="Работы"
+                            icon={<ListDetails size={18} strokeWidth={1} />}
+                        ></Tabs.Tab>
+                    </Tabs>
+                </Panel>
+                <div className={style.footer}>
+                    <Link href="#">Сообщить о проблеме</Link>
+                    {user && <Link href="#">Редактировать</Link>}
+                </div>
+            </div>
             <div className={style.panel}>
                 {main.deleted && (
                     <Panel style={{ background: "#48f", marginBottom: 8 }}>

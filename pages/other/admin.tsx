@@ -6,12 +6,18 @@ import { Accordion, Divider } from "@mantine/core";
 import Head from "next/head";
 import { Tabs } from "@mantine/core";
 import { GitFork, Stack2 } from "tabler-icons-react";
-import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
+import {
+    DataGrid,
+    GridRowsProp,
+    GridColDef,
+    GridRenderCellParams,
+} from "@mui/x-data-grid";
 import depart from "../../public/departments.json";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../../lib/firebase";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
+import Link from "next/link";
 
 export async function getServerSideProps() {
     const querySnapshot = await getDocs(collection(firestore, "courses"));
@@ -72,10 +78,10 @@ const Admin: NextPage<Props> = ({ data }) => {
     const rowsCourses: GridRowsProp = data.map((d: any) => {
         return {
             id: d.token,
-            token: d.token,
+            token: [d.year, d.token],
             name: d.name,
             year: d.year,
-            half: d.half + 2 * (d.year - 1),
+            half: d.half,
             state: d.deleted ? "Скрыт" : "Активен",
             editedBy: d.editedBy,
             created: dayjs(d.created).locale("ru").format("D MMM YYYY, HH:mm"),
@@ -83,11 +89,20 @@ const Admin: NextPage<Props> = ({ data }) => {
     });
     const columnsCourses: GridColDef[] = [
         { field: "name", headerName: "Название", width: 300 },
-        { field: "token", headerName: "Токен", width: 100 },
+        {
+            field: "token",
+            headerName: "Токен",
+            width: 100,
+            renderCell: (params: GridRenderCellParams<any>) => (
+                <Link href={`/c${params.value[0]}/${params.value[1]}`}>
+                    {"/" + params.value[1]}
+                </Link>
+            ),
+        },
         { field: "state", headerName: "Статус", width: 85 },
         { field: "year", headerName: "Курс", width: 50 },
         { field: "half", headerName: "Семестр", width: 80 },
-        { field: "editedBy", headerName: "Редактировал", width: 200 },
+        { field: "editedBy", headerName: "Редактировал", width: 150 },
         { field: "created", headerName: "Последнее изменение", width: 200 },
     ];
     return (
