@@ -76,7 +76,7 @@ const Admin: NextPage<Props> = ({ data }) => {
             name: d.name,
             year: d.year,
             half: d.half + 2 * (d.year - 1),
-            state: d.deleted ? "Удален" : "Активен",
+            state: d.deleted ? "Скрыт" : "Активен",
             editedBy: d.editedBy,
             created: dayjs(d.created).locale("ru").format("D MMM YYYY, HH:mm"),
         };
@@ -125,7 +125,7 @@ const Admin: NextPage<Props> = ({ data }) => {
                                         }}
                                         getRowClassName={(params) =>
                                             `theme-${
-                                                params.row.state == "Удален"
+                                                params.row.state == "Скрыт"
                                                     ? "faded"
                                                     : "normal"
                                             }`

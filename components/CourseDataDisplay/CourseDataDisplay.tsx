@@ -1,0 +1,202 @@
+import { NextPage } from "next";
+import Link from "next/link";
+import dayjs from "dayjs";
+import "dayjs/locale/ru";
+import style from "./style.module.scss";
+import Panel from "../Panel/panel";
+import { Divider, Text } from "@mantine/core";
+import Entry from "./Entry";
+import depart from "../../public/departments.json";
+
+export type Props = {
+    main: any;
+    data: any;
+    error: any;
+};
+
+const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
+    console.log(data);
+    return (
+        <div className={style.wrapper}>
+            <div className={style.main}></div>
+            <div className={style.panel}>
+                {main.deleted && (
+                    <Panel style={{ background: "#48f", marginBottom: 8 }}>
+                        <Text weight={600} color="white">
+                            Данный курс скрыт из общего списка
+                        </Text>
+                    </Panel>
+                )}
+                <Divider
+                    m="sm"
+                    mt={0}
+                    label="Основное"
+                    labelPosition="center"
+                ></Divider>
+                <Panel>
+                    <Entry main="Название" data={main.name} />
+                    <Entry
+                        main="Модуль"
+                        data={`Курс ${main.year}, ${
+                            main.half == 1 ? "первое" : "второе"
+                        } полугодие`}
+                    />
+                    {data.examShow && (
+                        <Entry
+                            main="Экзамен"
+                            data={dayjs(new Date(data.examDate))
+                                .locale("ru")
+                                .format("DD MMM, YYYY")}
+                        />
+                    )}
+                    {data.hours && (
+                        <Entry main="Количество часов" data={data.hours} />
+                    )}
+                    {main.depart != "0" && (
+                        <Entry
+                            main="Кафедра"
+                            data={
+                                depart[parseInt(main.depart) - 1].link ? (
+                                    <Link
+                                        href={
+                                            depart[parseInt(main.depart) - 1]
+                                                .link + ""
+                                        }
+                                    >
+                                        {depart[parseInt(main.depart) - 1].name}
+                                    </Link>
+                                ) : (
+                                    <span>
+                                        {depart[parseInt(main.depart) - 1].name}
+                                    </span>
+                                )
+                            }
+                        />
+                    )}
+                </Panel>
+                {((data.colocShow && data.coloc != 0) ||
+                    (data.workShow && data.work != 0) ||
+                    (data.controlShow && data.control != 0) ||
+                    (data.formulaShow && data.formula != "")) && (
+                    <>
+                        <Divider
+                            m="sm"
+                            label="Работы"
+                            labelPosition="center"
+                        ></Divider>
+                        <Panel>
+                            {data.colocShow && data.coloc != 0 && (
+                                <Entry
+                                    main="Количество коллоквиумов"
+                                    data={data.coloc}
+                                />
+                            )}
+                            {data.workShow && data.work != 0 && (
+                                <Entry
+                                    main="Количество работ"
+                                    data={data.work}
+                                />
+                            )}
+                            {data.controlShow && data.control != 0 && (
+                                <Entry
+                                    main="Количество контрольных работ"
+                                    data={data.control}
+                                />
+                            )}
+                            {data.formulaShow && data.formula != "" && (
+                                <Entry
+                                    main="Формула оценки"
+                                    data={data.formula}
+                                />
+                            )}
+                        </Panel>
+                    </>
+                )}
+                {data.lecturer && data.teachers.length != 0 && (
+                    <>
+                        <Divider
+                            m="sm"
+                            label="Преподаватели"
+                            labelPosition="center"
+                        ></Divider>
+                        <Panel>
+                            {data.lecturer && (
+                                <Entry
+                                    main="Преподаватель"
+                                    data={
+                                        <span>
+                                            <br />
+                                            <span
+                                                style={{ marginRight: 16 }}
+                                            ></span>
+                                            {data.lecturer.name}
+                                        </span>
+                                    }
+                                />
+                            )}
+                            {data.teachers.length != 0 && (
+                                <Entry
+                                    main="Другие преподаватели"
+                                    noBreak
+                                    data={
+                                        <>
+                                            {data.teachers.map(
+                                                (
+                                                    teacher: any,
+                                                    index: number
+                                                ) => (
+                                                    <Text key={index}>
+                                                        <span
+                                                            style={{
+                                                                marginRight: 16,
+                                                            }}
+                                                        ></span>
+                                                        {teacher.name}
+                                                    </Text>
+                                                )
+                                            )}
+                                        </>
+                                    }
+                                />
+                            )}
+                        </Panel>
+                    </>
+                )}
+                {data.custom.length != 0 && (
+                    <>
+                        <Divider
+                            m="sm"
+                            label="Дополнительно"
+                            labelPosition="center"
+                        ></Divider>
+                        <Panel>
+                            {data.custom.map((item: any, index: number) => {
+                                return (
+                                    <Entry
+                                        main={item.title}
+                                        data={item.data}
+                                        key={index}
+                                    />
+                                );
+                            })}
+                        </Panel>
+                    </>
+                )}
+                <Divider m="sm" label="Версия" labelPosition="center"></Divider>
+                <Panel>
+                    <Entry main="Автор" data={main.createdBy} />
+                    <Entry main="Редактор" data={main.createdBy} />
+                    <Entry
+                        main="Дата изменения"
+                        data={dayjs(new Date(main.created))
+                            .locale("ru")
+                            .format("DD MMM YYYY, HH:mm")}
+                    />
+                    <Entry main="Токен" data={main.token} />
+                </Panel>
+            </div>
+        </div>
+    );
+};
+
+export default CourseDataDisplay;
