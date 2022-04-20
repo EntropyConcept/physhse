@@ -8,6 +8,28 @@ import { Tabs } from "@mantine/core";
 import { GitFork, Stack2 } from "tabler-icons-react";
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import depart from "../../public/departments.json";
+import { collection, getDocs } from "firebase/firestore";
+import { firestore } from "../../lib/firebase";
+import dayjs from "dayjs";
+import "dayjs/locale/ru";
+
+export async function getServerSideProps() {
+    const querySnapshot = await getDocs(collection(firestore, "courses"));
+    const courses = [] as any[];
+    querySnapshot.forEach((doc) => {
+        let data = doc.data();
+        data.created = data.created.toDate().toJSON();
+        courses.push(data);
+    });
+    courses.sort((a: any, b: any) => {
+        return a.deleted < b.deleted ? -1 : 1;
+    });
+    return {
+        props: {
+            data: courses,
+        },
+    };
+}
 
 const localeText = {
     columnMenuLabel: "Меню",
@@ -41,7 +63,33 @@ const columnsDepart: GridColDef[] = [
     },
 ];
 
-const Admin: NextPage = () => {
+type Props = {
+    data: any;
+};
+
+const Admin: NextPage<Props> = ({ data }) => {
+    console.log(data);
+    const rowsCourses: GridRowsProp = data.map((d: any) => {
+        return {
+            id: d.token,
+            token: d.token,
+            name: d.name,
+            year: d.year,
+            half: d.half + 2 * (d.year - 1),
+            state: d.deleted ? "Удален" : "Активен",
+            editedBy: d.editedBy,
+            created: dayjs(d.created).locale("ru").format("D MMM YYYY, HH:mm"),
+        };
+    });
+    const columnsCourses: GridColDef[] = [
+        { field: "name", headerName: "Название", width: 300 },
+        { field: "token", headerName: "Токен", width: 100 },
+        { field: "state", headerName: "Статус", width: 85 },
+        { field: "year", headerName: "Курс", width: 50 },
+        { field: "half", headerName: "Семестр", width: 80 },
+        { field: "editedBy", headerName: "Редактировал", width: 200 },
+        { field: "created", headerName: "Последнее изменение", width: 200 },
+    ];
     return (
         <>
             <Head>
@@ -53,7 +101,39 @@ const Admin: NextPage = () => {
                         <Tabs.Tab
                             label="Курсы"
                             icon={<Stack2 size={16} strokeWidth={1.5} />}
-                        ></Tabs.Tab>
+                        >
+                            <div
+                                style={{
+                                    display: "flex",
+                                    height: "100%",
+                                    width: "100%",
+                                }}
+                            >
+                                <div style={{ flexGrow: 1 }}>
+                                    <DataGrid
+                                        autoHeight
+                                        rows={rowsCourses}
+                                        columns={columnsCourses}
+                                        rowHeight={40}
+                                        localeText={localeText}
+                                        disableSelectionOnClick
+                                        sx={{
+                                            "& .theme-faded": {
+                                                backgroundColor: "#f0f0f0",
+                                                color: "#999",
+                                            },
+                                        }}
+                                        getRowClassName={(params) =>
+                                            `theme-${
+                                                params.row.state == "Удален"
+                                                    ? "faded"
+                                                    : "normal"
+                                            }`
+                                        }
+                                    />
+                                </div>
+                            </div>
+                        </Tabs.Tab>
                         <Tabs.Tab
                             label="Кафедры"
                             icon={<GitFork size={16} strokeWidth={1.5} />}
@@ -68,6 +148,7 @@ const Admin: NextPage = () => {
                                 <div style={{ flexGrow: 1 }}>
                                     <DataGrid
                                         autoHeight
+                                        disableSelectionOnClick
                                         rows={rowsDepart}
                                         columns={columnsDepart}
                                         rowHeight={40}
