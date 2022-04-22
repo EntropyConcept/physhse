@@ -1,51 +1,51 @@
 @import "../../styles/vars.scss";
+.forEditor {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
 
-.wrapper{
+.wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 1rem;
-    .main{
+    .main {
         display: flex;
         flex-direction: column;
-        align-items:stretch;
+        align-items: stretch;
         flex: 1;
-        .forEditor{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-        }
-        .footer{
+        .footer {
             align-self: flex-end;
             margin-top: 8px;
             display: flex;
             flex-direction: row;
             gap: 1rem;
-            a{
+            a {
                 transition: 0.3s;
                 size: 14px;
                 color: gray();
-                &:hover{
+                &:hover {
                     color: gray(7);
                 }
             }
         }
     }
-    .panel{
+    .panel {
         width: 25rem;
     }
 }
 
 @media (max-width: $screen-medium) {
-    .wrapper{
+    .wrapper {
         flex-direction: column;
-        .main{
+        .main {
             width: 100%;
         }
-        .panel{
+        .panel {
             order: -1;
             width: 100%;
         }

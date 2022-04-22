@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import { Text } from "@mantine/core";
 import { useEffect, useContext } from "react";
-import { PathContext } from "../../lib/context";
-import { CourseData } from "../../lib/hooks";
-import CourseDataDisplay from "../../components/CourseData/CourseDataDisplay";
+import { PathContext } from "../../../lib/context";
+import { CourseData } from "../../../lib/hooks";
+import CourseDataEdit from "../../../components/CourseData/CourseDataEdit";
 
 export async function getServerSideProps(context: any) {
     const [main, data, error] = await CourseData(context.query.id);
@@ -32,11 +32,11 @@ const Page: NextPage<Props> = ({ main, data, error }) => {
             {error && <Text color="red">{error}</Text>}
             {!error && (
                 <>
-                    <CourseDataDisplay
+                    <CourseDataEdit
                         main={main}
                         data={data}
                         error={error}
-                    ></CourseDataDisplay>
+                    ></CourseDataEdit>
                 </>
             )}
         </>

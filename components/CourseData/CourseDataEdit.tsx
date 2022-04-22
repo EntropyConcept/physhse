@@ -8,7 +8,7 @@ import Panel from "../Panel/panel";
 import { Divider, Text, Tabs, Button } from "@mantine/core";
 import Entry from "./Entry";
 import depart from "../../public/departments.json";
-import { FileSpreadsheet, News, ListDetails, Edit } from "tabler-icons-react";
+import { FileSpreadsheet, News, ListDetails, Replace, ArrowBack } from "tabler-icons-react";
 import { UserContext } from "../../lib/context";
 
 export type Props = {
@@ -19,28 +19,33 @@ export type Props = {
 
 const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
     const { user, username, role } = useContext(UserContext);
-    console.log(data);
-    return (
+
+    return (<>
+        {user && (
+            <>
+                <Panel
+                    style={{ marginBottom: 16 }}
+                    className={style.forEditor}
+                >
+                    
+                    <Button
+                        variant="outline"
+                        leftIcon={<Replace size={16} />}
+                    >
+                        Сохранить
+                    </Button>
+                    <Button
+                        variant="outline"
+                        color="red"
+                        leftIcon={<ArrowBack size={16} />}
+                    >
+                        Завершить редактирование
+                    </Button>
+                </Panel>
+            </>
+        )}
         <div className={style.wrapper}>
             <div className={style.main}>
-                {user && (
-                    <>
-                        <Panel
-                            style={{ marginBottom: 16 }}
-                            className={style.forEditor}
-                        >
-                            <span>
-                                Вы просматриваете данную страницу как студент
-                            </span>
-                            <Button
-                                variant="outline"
-                                leftIcon={<Edit size={16} />}
-                            >
-                                Перейти к редактированию
-                            </Button>
-                        </Panel>
-                    </>
-                )}
                 <Panel padding={"0 0 1rem 0"}>
                     <Tabs>
                         <Tabs.Tab
@@ -244,7 +249,7 @@ const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
                 </Panel>
             </div>
         </div>
-    );
+        </>);
 };
 
 export default CourseDataDisplay;
