@@ -8,7 +8,7 @@ import Head from "next/head"
 import {getHalfs} from "../lib/firebase"
 
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     let data = await getHalfs(1);
     return {
       props: {

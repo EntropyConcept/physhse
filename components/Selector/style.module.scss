@@ -23,6 +23,11 @@
             padding: 2rem;
             flex-direction: column;
             outline: 1px solid gray(3);
+            border: none;
+            background: gray(1);
+            font-size: inherit;
+            font-weight: inherit;
+            font-family: inherit;
             // border: 1px solid gray(3);
             z-index: 2;
             &:hover {

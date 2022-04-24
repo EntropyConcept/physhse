@@ -19,7 +19,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import Link from "next/link";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const querySnapshot = await getDocs(collection(firestore, "courses"));
     const courses = [] as any[];
     querySnapshot.forEach((doc) => {
@@ -74,7 +74,6 @@ type Props = {
 };
 
 const Admin: NextPage<Props> = ({ data }) => {
-    console.log(data);
     const rowsCourses: GridRowsProp = data.map((d: any) => {
         return {
             id: d.token,

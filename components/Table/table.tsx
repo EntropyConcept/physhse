@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { Plus, X } from "tabler-icons-react";
 import { UserContext } from "../../lib/context";
 import { useContext, useState } from "react";
+import axios from "axios";
 import {
     Modal,
     Divider,
@@ -264,6 +265,12 @@ const Table: FunctionComponent<Props> = (props: Props) => {
                         courseData,
                         { merge: true }
                     ).then(() => {
+                        axios.post("/api/revalidate", {
+                            url: "/other/admin",
+                        });
+                        axios.post("/api/revalidate", {
+                            url: `/c${year}`,
+                        });
                         reset();
                     });
                 })
@@ -304,14 +311,14 @@ const Table: FunctionComponent<Props> = (props: Props) => {
                                 passHref
                                 href={d.link ? d.link : "#"}
                             >
-                                <div
+                                <button
                                     className={classNames(
                                         style.entry,
                                         style.link
                                     )}
                                 >
                                     {d.content ? d.content : d.name}
-                                </div>
+                                </button>
                             </Link>
                         );
                     }
