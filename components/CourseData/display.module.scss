@@ -1,0 +1,51 @@
+@import "../../styles/vars.scss";
+
+
+    .filesWrapper{
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+        gap: .5rem;
+    
+        .file{
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            // justify-content: center;
+            border-radius: .5rem;
+            padding: 1rem;
+            min-width: 8rem;
+            height: 10.5rem;
+            border: 1px solid gray(3);
+            overflow: hidden;
+            .fileName{
+                margin: 0 -.25rem;
+                margin-top: .5rem;
+                font-size: 14px;
+            }
+            .fileDate{
+                margin-top: auto;
+                justify-self: flex-end;
+                font-size: 12px;
+                color: gray();
+            }
+            .fileIcon{
+                svg{
+                    width: 3.5rem;
+                    height: 3.5rem;  
+                };
+            }
+            &:hover{
+                color: blue();
+                background: gray(0);
+            }
+        }
+        .fileAdd{
+            align-items: center;
+            justify-content: center;
+            background: mix(gray(1), gray(2));
+            color: gray(6);
+        }
+    }
