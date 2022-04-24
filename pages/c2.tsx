@@ -14,6 +14,7 @@ export async function getStaticProps() {
             half1: data.half1,
             half2: data.half2,
         },
+        revalidate: 1200,
     };
 }
 

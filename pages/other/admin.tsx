@@ -34,6 +34,7 @@ export async function getStaticProps() {
         props: {
             data: courses,
         },
+        revalidate: 1800,
     };
 }
 
