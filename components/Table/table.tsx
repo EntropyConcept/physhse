@@ -271,6 +271,9 @@ const Table: FunctionComponent<Props> = (props: Props) => {
                         axios.post("/api/revalidate", {
                             url: `/c${year}`,
                         });
+                        axios.post("/api/revalidate", {
+                            url: `/c${year}/${token}`,
+                        });
                         reset();
                     });
                 })

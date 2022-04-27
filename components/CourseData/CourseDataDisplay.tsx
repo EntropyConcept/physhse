@@ -37,50 +37,14 @@ interface File {
 
 const Files: File[] = [
     {
-        name: "File.pdf",
+        name: "Конспект лекций - Марго.pdf",
         extension: "pdf",
         link: "",
         date: new Date(),
     },
     {
-        name: "File.doc",
-        extension: "doc",
-        link: "",
-        date: new Date(),
-    },
-    {
-        name: "File.txt",
-        extension: "txt",
-        link: "",
-        date: new Date(),
-    },
-    {
-        name: "File.xls",
-        extension: "xls",
-        link: "",
-        date: new Date(),
-    },
-    {
-        name: "File.zip",
-        extension: "zip",
-        link: "",
-        date: new Date(),
-    },
-    {
-        name: "File.png",
-        extension: "png",
-        link: "",
-        date: new Date(),
-    },
-    {
-        name: "File.mp4",
-        extension: "mp4",
-        link: "",
-        date: new Date(),
-    },
-    {
-        name: "File.py",
-        extension: "py",
+        name: "Конспект лекций - МФТИ.pdf",
+        extension: "pdf",
         link: "",
         date: new Date(),
     },

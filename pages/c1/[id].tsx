@@ -4,9 +4,11 @@ import { useEffect, useContext } from "react";
 import { PathContext } from "../../lib/context";
 import { CourseData } from "../../lib/hooks";
 import CourseDataDisplay from "../../components/CourseData/CourseDataDisplay";
+import { collection, getDocs } from "firebase/firestore";
+import { firestore } from "../../lib/firebase";
 
-export async function getStaticProps(context: any) {
-    const [main, data, error] = await CourseData(context.query.id);
+export async function getStaticProps({ params }: any) {
+    const [main, data, error] = await CourseData(params.id);
 
     return {
         props: { main, data, error },
@@ -14,6 +16,14 @@ export async function getStaticProps(context: any) {
     };
 }
 
+export async function getStaticPaths() {
+    const q = await getDocs(collection(firestore, "courses"));
+    const paths = q.docs.map((d) => `/c1/${d.id}`);
+    return {
+        paths: paths,
+        fallback: false,
+    };
+}
 type Props = {
     main: any;
     data: any;
