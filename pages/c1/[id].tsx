@@ -5,11 +5,12 @@ import { PathContext } from "../../lib/context";
 import { CourseData } from "../../lib/hooks";
 import CourseDataDisplay from "../../components/CourseData/CourseDataDisplay";
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
     const [main, data, error] = await CourseData(context.query.id);
 
     return {
         props: { main, data, error },
+        revalidate: 1800,
     };
 }
 
