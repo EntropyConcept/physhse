@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import Selector from "../../components/Selector/selector";
 import Panel from "../../components/Panel/panel";
 import style from "../../styles/other.module.scss";
-import { Accordion, Divider } from "@mantine/core";
+import { Accordion, Divider, Text, Button } from "@mantine/core";
 import Head from "next/head";
 import { Tabs } from "@mantine/core";
-import { GitFork, Stack2 } from "tabler-icons-react";
+import { GitFork, Stack2, Refresh } from "tabler-icons-react";
 import {
     DataGrid,
     GridRowsProp,
@@ -18,8 +18,9 @@ import { firestore } from "../../lib/firebase";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import Link from "next/link";
+import axios from "axios";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const querySnapshot = await getDocs(collection(firestore, "courses"));
     const courses = [] as any[];
     querySnapshot.forEach((doc) => {
@@ -34,6 +35,7 @@ export async function getServerSideProps() {
         props: {
             data: courses,
         },
+        revalidate: 1800,
     };
 }
 
@@ -74,7 +76,6 @@ type Props = {
 };
 
 const Admin: NextPage<Props> = ({ data }) => {
-    console.log(data);
     const rowsCourses: GridRowsProp = data.map((d: any) => {
         return {
             id: d.token,
@@ -170,6 +171,50 @@ const Admin: NextPage<Props> = ({ data }) => {
                                         localeText={localeText}
                                     />
                                 </div>
+                            </div>
+                        </Tabs.Tab>
+                        <Tabs.Tab
+                            label="Ревалидация"
+                            icon={<Refresh size={16} strokeWidth={1.5} />}
+                        >
+                            <div style={{ padding: "0 1rem 1rem 1rem" }}>
+                                <Text color="gray">
+                                    Ревалидация позволяет вызвать обновление
+                                    заданной страницы при изменении данных в БД.
+                                </Text>
+                                <Divider m="sm"></Divider>
+                                <Button
+                                    onClick={() => {
+                                        axios.post("/api/revalidate", {
+                                            url: "/other/admin",
+                                        });
+                                    }}
+                                    variant="outline"
+                                >
+                                    Страница управления
+                                </Button>
+                                <Button
+                                    onClick={() => {
+                                        axios.post("/api/revalidate", {
+                                            url: "/c1",
+                                        });
+                                    }}
+                                    variant="outline"
+                                    ml="sm"
+                                >
+                                    Страница первого курса
+                                </Button>
+                                <Button
+                                    onClick={() => {
+                                        axios.post("/api/revalidate", {
+                                            url: "/c2",
+                                        });
+                                    }}
+                                    variant="outline"
+                                    ml="sm"
+                                >
+                                    Страница второго курса
+                                </Button>
                             </div>
                         </Tabs.Tab>
                     </Tabs>

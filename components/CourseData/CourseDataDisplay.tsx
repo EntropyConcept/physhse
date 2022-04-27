@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Link from "next/link";
-import { useContext } from "react";
+import { ReactChild, useContext } from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import style from "./style.module.scss";
@@ -10,11 +10,126 @@ import Entry from "./Entry";
 import depart from "../../public/departments.json";
 import { FileSpreadsheet, News, ListDetails, Edit } from "tabler-icons-react";
 import { UserContext } from "../../lib/context";
+import display from "./display.module.scss";
+import {
+    FileText,
+    FileCode,
+    FileZip,
+    FilePlus,
+    File3d,
+    File,
+    FileMusic,
+} from "tabler-icons-react";
+import classNames from "classnames";
 
 export type Props = {
     main: any;
     data: any;
     error: any;
+};
+
+interface File {
+    name: string;
+    extension: string;
+    link: string;
+    date?: Date;
+}
+
+const Files: File[] = [
+    {
+        name: "File.pdf",
+        extension: "pdf",
+        link: "",
+        date: new Date(),
+    },
+    {
+        name: "File.doc",
+        extension: "doc",
+        link: "",
+        date: new Date(),
+    },
+    {
+        name: "File.txt",
+        extension: "txt",
+        link: "",
+        date: new Date(),
+    },
+    {
+        name: "File.xls",
+        extension: "xls",
+        link: "",
+        date: new Date(),
+    },
+    {
+        name: "File.zip",
+        extension: "zip",
+        link: "",
+        date: new Date(),
+    },
+    {
+        name: "File.png",
+        extension: "png",
+        link: "",
+        date: new Date(),
+    },
+    {
+        name: "File.mp4",
+        extension: "mp4",
+        link: "",
+        date: new Date(),
+    },
+    {
+        name: "File.py",
+        extension: "py",
+        link: "",
+        date: new Date(),
+    },
+];
+const MapFileType: any = {
+    pdf: <FileText strokeWidth={1} />,
+    doc: <FileText strokeWidth={1} />,
+    docx: <FileText strokeWidth={1} />,
+    txt: <FileText strokeWidth={1} />,
+    xls: <FileSpreadsheet strokeWidth={1} />,
+    xlsx: <FileSpreadsheet strokeWidth={1} />,
+    csv: <FileSpreadsheet strokeWidth={1} />,
+    zip: <FileZip strokeWidth={1} />,
+    rar: <FileZip strokeWidth={1} />,
+    "7z": <FileZip strokeWidth={1} />,
+    png: <File3d strokeWidth={1} />,
+    jpg: <File3d strokeWidth={1} />,
+    jpeg: <File3d strokeWidth={1} />,
+    svg: <File3d strokeWidth={1} />,
+    mp3: <FileMusic strokeWidth={1} />,
+    mp4: <FileMusic strokeWidth={1} />,
+    avi: <FileMusic strokeWidth={1} />,
+    py: <FileCode strokeWidth={1} />,
+    js: <FileCode strokeWidth={1} />,
+    html: <FileCode strokeWidth={1} />,
+    json: <FileCode strokeWidth={1} />,
+};
+const MapFileColor: any = {
+    pdf: "#ff4f60",
+    doc: "#2284ff",
+    docx: "#2284ff",
+    txt: "#444",
+    xls: "#00a699",
+    xlsx: "#00a699",
+    csv: "#00a699",
+    zip: "#ffa500",
+    rar: "#ffa500",
+    "7z": "#ffa500",
+    png: "#8844ff",
+    jpg: "#8844ff",
+    jpeg: "#8844ff",
+    svg: "#8844ff",
+    mp3: "#ff8800",
+    mp4: "#ff8800",
+    avi: "#ff8800",
+    py: "#2284ff",
+    js: "#ff8800",
+    html: "#ff4f60",
+    json: "#ff8800",
 };
 
 const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
@@ -55,7 +170,61 @@ const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
                         <Tabs.Tab
                             label="Прикреплённые файлы"
                             icon={<FileSpreadsheet size={18} strokeWidth={1} />}
-                        ></Tabs.Tab>
+                        >
+                            <div className={display.filesWrapper}>
+                                {Files.map((file: File, index) => (
+                                    <div key={index} className={display.file}>
+                                        <div
+                                            className={display.fileIcon}
+                                            style={{
+                                                color: MapFileColor[
+                                                    file.extension
+                                                ],
+                                            }}
+                                        >
+                                            {file.extension in MapFileType ? (
+                                                MapFileType[file.extension]
+                                            ) : (
+                                                <File
+                                                    strokeWidth={1}
+                                                    size={"3rem"}
+                                                />
+                                            )}
+                                        </div>
+                                        <Text
+                                            className={display.fileName}
+                                            lineClamp={2}
+                                            align="center"
+                                            size="md"
+                                        >
+                                            {file.name}
+                                        </Text>
+                                        {file.date && (
+                                            <div className={display.fileDate}>
+                                                {dayjs(file.date)
+                                                    .locale("ru")
+                                                    .format("DD.MM.YYYY")}
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                                {user && (
+                                    <div
+                                        className={classNames(
+                                            display.file,
+                                            display.fileAdd
+                                        )}
+                                    >
+                                        <div className={display.fileIcon}>
+                                            <FilePlus
+                                                size={"3rem"}
+                                                strokeWidth={1}
+                                            ></FilePlus>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </Tabs.Tab>
                         <Tabs.Tab
                             label="Работы"
                             icon={<ListDetails size={18} strokeWidth={1} />}

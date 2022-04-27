@@ -32,6 +32,10 @@ $static: mix(gray(2), gray(1));
             transition: 0.3s;
             outline: 1px solid gray(3);
             padding: 0.5rem 1rem;
+            border: none;
+            background: gray(1);
+            font-size: inherit;
+            font-family: inherit;
             &:hover {
                 background: #fff;
             }
