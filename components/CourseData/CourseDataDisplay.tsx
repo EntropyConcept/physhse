@@ -98,7 +98,7 @@ const MapFileColor: any = {
 
 const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
     const { user, username, role } = useContext(UserContext);
-
+    console.log(user);
     return (
         <div className={style.wrapper}>
             <div className={style.main}>

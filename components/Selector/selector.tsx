@@ -11,18 +11,19 @@ import {
     LayersLinked,
     Drone,
     LayoutGrid,
+    Apps,
 } from "tabler-icons-react";
 import classNames from "classnames";
 import { UserContext } from "../../lib/context";
 export interface Props {}
 
 const buttons = [
-    {
-        name: "Рейтинг",
-        link: "other",
-        icon: School,
-        locked: true,
-    },
+    // {
+    //     name: "Рейтинг",
+    //     link: "other",
+    //     icon: School,
+    //     locked: true,
+    // },
     {
         name: "Преподаватели",
         link: "other",
@@ -46,6 +47,12 @@ const buttons = [
         link: "other",
         icon: LayersLinked,
         locked: true,
+    },
+    {
+        name: "Дополнительно",
+        link: "add",
+        icon:  Apps,
+        locked: false,
     },
     {
         name: "Лекторий",

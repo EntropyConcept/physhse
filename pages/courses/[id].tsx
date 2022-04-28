@@ -18,7 +18,7 @@ export async function getStaticProps({ params }: any) {
 
 export async function getStaticPaths() {
     const q = await getDocs(collection(firestore, "courses"));
-    const paths = q.docs.map((d) => `/c1/${d.id}`);
+    const paths = q.docs.map((d) => `/courses/${d.id}`);
     return {
         paths: paths,
         fallback: "blocking",

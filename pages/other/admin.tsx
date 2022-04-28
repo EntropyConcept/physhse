@@ -95,7 +95,7 @@ const Admin: NextPage<Props> = ({ data }) => {
             headerName: "Токен",
             width: 100,
             renderCell: (params: GridRenderCellParams<any>) => (
-                <Link href={`/c${params.value[0]}/${params.value[1]}`}>
+                <Link href={`/courses/${params.value[1]}`}>
                     {"/" + params.value[1]}
                 </Link>
             ),

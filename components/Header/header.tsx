@@ -120,7 +120,7 @@ const Header: FunctionComponent<Props> = (props: Props) => {
                                 <button
                                     className={classNames({
                                         [style.selected]:
-                                            props.tab == 5 || dir[1] == "other",
+                                            props.tab == 6 || dir[1] == "other",
                                     })}
                                 >
                                     Другое
