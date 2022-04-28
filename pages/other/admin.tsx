@@ -215,6 +215,17 @@ const Admin: NextPage<Props> = ({ data }) => {
                                 >
                                     Страница второго курса
                                 </Button>
+                                <Button
+                                    onClick={() => {
+                                        axios.post("/api/revalidate", {
+                                            url: "/courses",
+                                        });
+                                    }}
+                                    variant="outline"
+                                    ml="sm"
+                                >
+                                    Общая страница курсов
+                                </Button>
                             </div>
                         </Tabs.Tab>
                     </Tabs>
