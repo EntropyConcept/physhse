@@ -184,38 +184,6 @@ const dev: NextPage = () => {
                     bullet={<Circle size={16} />}
                     title="План разработки"
                 ></Timeline.Item>
-                {/*                <Timeline.Item
-                    bullet={<RotateClockwise2 size={16} />}
-                    title="Второй и третий курс"
-                    lineVariant="dotted"
-                >
-                    Добавить оставшуюся информацию для четвертого курса в
-                    главный таймлайн
-                    <Text {...time}>To Do</Text>
-                    Сделать функцию переключения между кафедрами на странице
-                    третьего и четвертого курсов
-                    <Text {...time}>To Do</Text>
-                </Timeline.Item>
-                <Timeline.Item
-                    bullet={<RotateClockwise2 size={16} />}
-                    title="Сделать регистрацию"
-                    lineVariant="dotted"
-                >
-                    Логин для админов
-                    <Text {...time}>To Do</Text>
-                    Панель админов
-                    <Text {...time}>To Do</Text>
-                </Timeline.Item>
-                <Timeline.Item
-                    bullet={<RotateClockwise2 size={16} />}
-                    title="Добавление функций по запросам"
-                    lineVariant="dotted"
-                >
-                    Интеграция с ПУД
-                    <Text {...time}>To Do</Text>
-                    Интеграция с расписанием
-                    <Text {...time}>To Do</Text>
-                </Timeline.Item>*/}
                 {progress.map((item, index) => (
                     <Timeline.Item
                         key={index}
