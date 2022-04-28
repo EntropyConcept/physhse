@@ -49,20 +49,11 @@ a {
 
 @media screen and (max-width: $screen-tiny) {
     html {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 
-@media screen and (max-width: $screen-phone) {
-    html {
-        font-size: 11px;
-    }
-}
 
-p {
-    color: gray(6);
-    font-size: 1.2rem;
-}
 body.dark,
 body[dark] {
     p {
@@ -70,24 +61,6 @@ body[dark] {
     }
 }
 
-@for $i from 1 to 7 {
-    h#{$i} {
-        transition: 0.3s;
-        margin: (7-$i) * 0.3rem;
-        font-size: (7-$i) * 0.7rem;
-        color: mix(gray(8), gray(7));
-    }
-}
-
-h3 {
-    font-weight: 500;
-}
-
-h4,
-h5,
-h6 {
-    font-weight: 400;
-}
 
 a {
     text-decoration: none;
@@ -119,17 +92,6 @@ hr {
         font-size: (7-$i) * 0.7rem;
     }
 }
-
-h3 {
-    font-weight: 500;
-}
-
-h4,
-h5,
-h6 {
-    font-weight: 400;
-}
-
 a {
     text-decoration: none;
     color: inherit;

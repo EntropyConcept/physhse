@@ -10,6 +10,15 @@ import Entry from "./Entry";
 import depart from "../../public/departments.json";
 import { FileSpreadsheet, News, ListDetails, Edit } from "tabler-icons-react";
 import { UserContext } from "../../lib/context";
+import { unified } from "unified";
+import remarkGfm from "remark-gfm";
+import rehypeStringify from "rehype-stringify";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import remarkRehype from "remark-rehype";
+import remarkParse from "remark-parse";
+import { TypographyStylesProvider } from "@mantine/core";
+import ReactMarkdown from "react-markdown";
 import display from "./display.module.scss";
 import {
     FileText,
@@ -98,7 +107,19 @@ const MapFileColor: any = {
 
 const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
     const { user, username, role } = useContext(UserContext);
-
+    const get = async (d: string) => {
+        return String(
+            await unified()
+                .use(remarkGfm)
+                .use(remarkParse)
+                .use(remarkMath)
+                .use(remarkRehype)
+                .use(rehypeKatex)
+                .use(rehypeStringify)
+                .process(d)
+        );
+    };
+    console.log(get("FFFF"));
     return (
         <div className={style.wrapper}>
             <div className={style.main}>
@@ -130,6 +151,14 @@ const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
                                 Все расходимся, данные по предмету пока не
                                 добавили
                             </Text>
+                            <Divider m="sm" />
+                            <TypographyStylesProvider>
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: "",
+                                    }}
+                                ></div>
+                            </TypographyStylesProvider>
                         </Tabs.Tab>
                         <Tabs.Tab
                             label="Прикреплённые файлы"
