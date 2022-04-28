@@ -8,39 +8,45 @@ import Head from "next/head";
 import { getHalfs } from "../lib/firebase";
 
 export async function getStaticProps() {
-    let data = await getHalfs(1);
+    let data = await getHalfs(0);
     return {
         props: {
-            half1: data.half1,
-            half2: data.half2,
+            data: data.half1.concat(data.half2),
         },
         revalidate: 1200,
     };
 }
 
 export type Props = {
-    half1: any[];
-    half2: any[];
+    data: any[];
 };
 
-const c1: NextPage<Props> = ({ half1, half2 }) => {
+const add: NextPage<Props> = ({ data }) => {
     return (
         <>
             <Head>
-                <title>Курс 1</title>
+                <title>Дополнительно</title>
             </Head>
-            <Table top static data={[{ name: "Первый семестр" }]} />
+            <Table top static data={[{ name: "Математика" }]} />
             <Table
-                data={half1.map((entry) => {
+                data={data.filter((e)=>e.half == 0).map((entry) => {
                     return { name: entry.name, link: "/courses/" + entry.token };
                 })}
                 year={1}
                 half={1}
             />
-            <Table static data={[{ name: "Второй семестр" }]} />
+            <Table static data={[{ name: "Физика" }]} />
+            <Table
+                data={data.filter((e)=>e.half == 1).map((entry) => {
+                    return { name: entry.name, link: "/courses/" + entry.token };
+                })}
+                year={1}
+                half={2}
+            />
+            <Table static data={[{ name: "Другое" }]} />
             <Table
                 bottom
-                data={half2.map((entry) => {
+                data={data.filter((e)=>e.half == 2).map((entry) => {
                     return { name: entry.name, link: "/courses/" + entry.token };
                 })}
                 year={1}
@@ -56,26 +62,14 @@ const c1: NextPage<Props> = ({ half1, half2 }) => {
                 content={[
                     <Panel overflow="hidden" padding={0} key="1">
                         <Accordion multiple>
-                            <Accordion.Item label="Сайты вышки">
-                                В процессе обработки
-                            </Accordion.Item>
-                            <Accordion.Item label="Расписание">
-                                В процессе обработки
-                            </Accordion.Item>
-                            <Accordion.Item label="Академические возможности">
+                            <Accordion.Item label="Где искать">
                                 В процессе обработки
                             </Accordion.Item>
                         </Accordion>
                     </Panel>,
                     <Panel overflow="hidden" padding={0} key="2">
                         <Accordion multiple>
-                            <Accordion.Item label="Майноры">
-                                В процессе обработки
-                            </Accordion.Item>
-                            <Accordion.Item label="Школы">
-                                В процессе обработки
-                            </Accordion.Item>
-                            <Accordion.Item label="Другие материалы">
+                            <Accordion.Item label="Как выжить">
                                 В процессе обработки
                             </Accordion.Item>
                         </Accordion>
@@ -86,4 +80,4 @@ const c1: NextPage<Props> = ({ half1, half2 }) => {
     );
 };
 
-export default c1;
+export default add;

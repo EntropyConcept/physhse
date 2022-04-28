@@ -95,7 +95,7 @@ const Admin: NextPage<Props> = ({ data }) => {
             headerName: "Токен",
             width: 100,
             renderCell: (params: GridRenderCellParams<any>) => (
-                <Link href={`/c${params.value[0]}/${params.value[1]}`}>
+                <Link href={`/courses/${params.value[1]}`}>
                     {"/" + params.value[1]}
                 </Link>
             ),
@@ -214,6 +214,17 @@ const Admin: NextPage<Props> = ({ data }) => {
                                     ml="sm"
                                 >
                                     Страница второго курса
+                                </Button>
+                                <Button
+                                    onClick={() => {
+                                        axios.post("/api/revalidate", {
+                                            url: "/courses",
+                                        });
+                                    }}
+                                    variant="outline"
+                                    ml="sm"
+                                >
+                                    Общая страница курсов
                                 </Button>
                             </div>
                         </Tabs.Tab>

@@ -107,19 +107,6 @@ const MapFileColor: any = {
 
 const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
     const { user, username, role } = useContext(UserContext);
-    const get = async (d: string) => {
-        return String(
-            await unified()
-                .use(remarkGfm)
-                .use(remarkParse)
-                .use(remarkMath)
-                .use(remarkRehype)
-                .use(rehypeKatex)
-                .use(rehypeStringify)
-                .process(d)
-        );
-    };
-    console.log(get("FFFF"));
     return (
         <div className={style.wrapper}>
             <div className={style.main}>
@@ -153,11 +140,11 @@ const CourseDataDisplay: NextPage<Props> = ({ main, data, error }) => {
                             </Text>
                             <Divider m="sm" />
                             <TypographyStylesProvider>
-                                <div
+                                {/* <div
                                     dangerouslySetInnerHTML={{
                                         __html: "",
                                     }}
-                                ></div>
+                                ></div> */}
                             </TypographyStylesProvider>
                         </Tabs.Tab>
                         <Tabs.Tab
