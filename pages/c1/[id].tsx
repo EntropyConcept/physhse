@@ -21,7 +21,7 @@ export async function getStaticPaths() {
     const paths = q.docs.map((d) => `/c1/${d.id}`);
     return {
         paths: paths,
-        fallback: false,
+        fallback: "blocking",
     };
 }
 type Props = {
