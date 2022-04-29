@@ -1,4 +1,6 @@
 import type { NextPage } from "next";
+import { useContext } from "react";
+import { UserContext } from "../../lib/context";
 import Selector from "../../components/Selector/selector";
 import Panel from "../../components/Panel/panel";
 import style from "../../styles/other.module.scss";
@@ -76,6 +78,7 @@ type Props = {
 };
 
 const Admin: NextPage<Props> = ({ data }) => {
+    const { user, username, role } = useContext(UserContext);
     const rowsCourses: GridRowsProp = data.map((d: any) => {
         return {
             id: d.token,
@@ -111,126 +114,159 @@ const Admin: NextPage<Props> = ({ data }) => {
             <Head>
                 <title>Управление</title>
             </Head>
-            <div>
-                <Panel padding={0}>
-                    <Tabs>
-                        <Tabs.Tab
-                            label="Курсы"
-                            icon={<Stack2 size={16} strokeWidth={1.5} />}
-                        >
-                            <div
-                                style={{
-                                    display: "flex",
-                                    height: "100%",
-                                    width: "100%",
-                                }}
-                            >
-                                <div style={{ flexGrow: 1 }}>
-                                    <DataGrid
-                                        autoHeight
-                                        rows={rowsCourses}
-                                        columns={columnsCourses}
-                                        rowHeight={40}
-                                        localeText={localeText}
-                                        disableSelectionOnClick
-                                        sx={{
-                                            "& .theme-faded": {
-                                                backgroundColor: "#f0f0f0",
-                                                color: "#999",
-                                            },
+            {user ? (
+                <>
+                    <div>
+                        <Panel padding={0}>
+                            <Tabs>
+                                <Tabs.Tab
+                                    label="Курсы"
+                                    icon={
+                                        <Stack2 size={16} strokeWidth={1.5} />
+                                    }
+                                >
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            height: "100%",
+                                            width: "100%",
                                         }}
-                                        getRowClassName={(params) =>
-                                            `theme-${
-                                                params.row.state == "Скрыт"
-                                                    ? "faded"
-                                                    : "normal"
-                                            }`
-                                        }
-                                    />
-                                </div>
-                            </div>
-                        </Tabs.Tab>
-                        <Tabs.Tab
-                            label="Кафедры"
-                            icon={<GitFork size={16} strokeWidth={1.5} />}
-                        >
-                            <div
-                                style={{
-                                    display: "flex",
-                                    height: "100%",
-                                    width: "100%",
-                                }}
-                            >
-                                <div style={{ flexGrow: 1 }}>
-                                    <DataGrid
-                                        autoHeight
-                                        disableSelectionOnClick
-                                        rows={rowsDepart}
-                                        columns={columnsDepart}
-                                        rowHeight={40}
-                                        localeText={localeText}
-                                    />
-                                </div>
-                            </div>
-                        </Tabs.Tab>
-                        <Tabs.Tab
-                            label="Ревалидация"
-                            icon={<Refresh size={16} strokeWidth={1.5} />}
-                        >
-                            <div style={{ padding: "0 1rem 1rem 1rem" }}>
-                                <Text color="gray">
-                                    Ревалидация позволяет вызвать обновление
-                                    заданной страницы при изменении данных в БД.
-                                </Text>
-                                <Divider m="sm"></Divider>
-                                <Button
-                                    onClick={() => {
-                                        axios.post("/api/revalidate", {
-                                            url: "/other/admin",
-                                        });
-                                    }}
-                                    variant="outline"
+                                    >
+                                        <div style={{ flexGrow: 1 }}>
+                                            <DataGrid
+                                                autoHeight
+                                                rows={rowsCourses}
+                                                columns={columnsCourses}
+                                                rowHeight={40}
+                                                localeText={localeText}
+                                                disableSelectionOnClick
+                                                sx={{
+                                                    "& .theme-faded": {
+                                                        backgroundColor:
+                                                            "#f0f0f0",
+                                                        color: "#999",
+                                                    },
+                                                }}
+                                                getRowClassName={(params) =>
+                                                    `theme-${
+                                                        params.row.state ==
+                                                        "Скрыт"
+                                                            ? "faded"
+                                                            : "normal"
+                                                    }`
+                                                }
+                                            />
+                                        </div>
+                                    </div>
+                                </Tabs.Tab>
+                                <Tabs.Tab
+                                    label="Кафедры"
+                                    icon={
+                                        <GitFork size={16} strokeWidth={1.5} />
+                                    }
                                 >
-                                    Страница управления
-                                </Button>
-                                <Button
-                                    onClick={() => {
-                                        axios.post("/api/revalidate", {
-                                            url: "/c1",
-                                        });
-                                    }}
-                                    variant="outline"
-                                    ml="sm"
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            height: "100%",
+                                            width: "100%",
+                                        }}
+                                    >
+                                        <div style={{ flexGrow: 1 }}>
+                                            <DataGrid
+                                                autoHeight
+                                                disableSelectionOnClick
+                                                rows={rowsDepart}
+                                                columns={columnsDepart}
+                                                rowHeight={40}
+                                                localeText={localeText}
+                                            />
+                                        </div>
+                                    </div>
+                                </Tabs.Tab>
+                                <Tabs.Tab
+                                    label="Ревалидация"
+                                    icon={
+                                        <Refresh size={16} strokeWidth={1.5} />
+                                    }
                                 >
-                                    Страница первого курса
-                                </Button>
-                                <Button
-                                    onClick={() => {
-                                        axios.post("/api/revalidate", {
-                                            url: "/c2",
-                                        });
-                                    }}
-                                    variant="outline"
-                                    ml="sm"
-                                >
-                                    Страница второго курса
-                                </Button>
-                                <Button
-                                    onClick={() => {
-                                        axios.post("/api/revalidate", {
-                                            url: "/courses",
-                                        });
-                                    }}
-                                    variant="outline"
-                                    ml="sm"
-                                >
-                                    Общая страница курсов
-                                </Button>
-                            </div>
-                        </Tabs.Tab>
-                    </Tabs>
+                                    <div
+                                        style={{ padding: "0 1rem 1rem 1rem" }}
+                                    >
+                                        <Text color="gray">
+                                            Ревалидация позволяет вызвать
+                                            обновление заданной страницы при
+                                            изменении данных в БД.
+                                        </Text>
+                                        <Divider m="sm"></Divider>
+                                        <Button
+                                            onClick={() => {
+                                                axios.post("/api/revalidate", {
+                                                    url: "/other/admin",
+                                                });
+                                            }}
+                                            variant="outline"
+                                        >
+                                            Страница управления
+                                        </Button>
+                                        <Button
+                                            onClick={() => {
+                                                axios.post("/api/revalidate", {
+                                                    url: "/c1",
+                                                });
+                                            }}
+                                            variant="outline"
+                                            ml="sm"
+                                        >
+                                            Страница первого курса
+                                        </Button>
+                                        <Button
+                                            onClick={() => {
+                                                axios.post("/api/revalidate", {
+                                                    url: "/c2",
+                                                });
+                                            }}
+                                            variant="outline"
+                                            ml="sm"
+                                        >
+                                            Страница второго курса
+                                        </Button>
+                                        <Button
+                                            onClick={() => {
+                                                axios.post("/api/revalidate", {
+                                                    url: "/courses",
+                                                });
+                                            }}
+                                            variant="outline"
+                                            ml="sm"
+                                        >
+                                            Общая страница курсов
+                                        </Button>
+                                    </div>
+                                </Tabs.Tab>
+                            </Tabs>
+                        </Panel>
+                    </div>
+                </>
+            ) : (
+                <Panel
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        maxWidth: "500px",
+                        alignSelf: "center",
+                        margin: "auto",
+                    }}
+                >
+                    <Text align="center">
+                        Данная страница доступна только редакторам{" "}
+                    </Text>
+                    <Link passHref href="/login">
+                        <Button mt="md">Перейти ко входу</Button>
+                    </Link>
                 </Panel>
-            </div>
+            )}
         </>
     );
 };
